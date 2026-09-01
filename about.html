@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Soliman Nightmares</title>
+  <meta name="description" content="ما يختبئ في الظلام — عالم Soliman Nightmares يجمع الرعب والغموض والتكنولوجيا المظلمة.">
+  <link rel="icon" href="../images/logo.jfif" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <div id="easter-overlay" class="easter-overlay" aria-hidden="true"></div>
+  <div id="easter-message" class="easter-message" role="status" aria-live="polite"></div>
+
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo" id="logo-trigger">
+        <img src="../images/logo.jfif" alt="Soliman Nightmares" class="logo-img" width="48" height="48">
+        <span class="logo-text">SOLIMAN NIGHTMARES</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="nightmares.html" class="nav-link">Nightmares</a></li>
+        <li><a href="dark-tech.html" class="nav-link">Dark Tech</a></li>
+        <li><a href="stories.html" class="nav-link">Stories</a></li>
+        <li><a href="messages.html" class="nav-link">Messages</a></li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="nav-link" target="_blank" rel="noopener">YouTube</a></li>
+      </ul>
+      <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary nav-cta" target="_blank" rel="noopener">WATCH ON YOUTUBE</a>
+    </div>
+  </nav>
+
+  <main style="padding-top: calc(72px + 3rem); min-height: 80vh;">
+    <div class="container">
+      <div class="about-content" style="max-width:720px;margin:0 auto;">
+        <span class="section-tag">WHAT LURKS IN THE DARK?</span>
+        <h1 class="section-title">Soliman Nightmares</h1>
+        
+        <div class="about-text">
+          <p>
+            Soliman Nightmares ليس مجرد قناة يوتيوب. إنه عالم يتقاطع فيه الرعب الكلاسيكي 
+            مع أخطر ما أنتجه العقل البشري: التكنولوجيا التي لا نفهم حدودها.
+          </p>
+          <p>
+            هنا نروي القصص التي تجعلك تشك في الظلال، وفي الخوارزميات التي تراقبك، 
+            وفي الأساطير التي تعود من خلال الشاشات. 
+            من أحداث غير مفسرة إلى سيناريوهات مستقبلية مرعبة، ومن الإنترنت المظلم إلى الذكاء الاصطناعي الذي يتعلم الخوف.
+          </p>
+          <p>
+            كل قصة هي دعوة لدخول عالم لا يوجد فيه ضوء آمن. 
+            نجمع بين Horror و Mystery و Dark Technology في تجربة واحدة متماسكة.
+          </p>
+          <p>
+            القصص لا تنتهي عند الفيديو... بعضها يبدأ بعد أن ينتهي.
+          </p>
+        </div>
+
+        <div style="margin-top:3rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+          <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank" rel="noopener">WATCH ON YOUTUBE</a>
+          <a href="messages.html" class="btn btn-outline">MESSAGES //</a>
+          <a href="../index.html" class="btn btn-outline">RETURN HOME</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none;padding-top:0;">
+        <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/easter-egg.js"></script>
+  <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        const open = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!open));
+        navLinks.classList.toggle('open', !open);
+      });
+    }
+  </script>
+</body>
+</html>
