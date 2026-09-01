@@ -52,7 +52,7 @@
     .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; font-size: 0.95rem; color: #fff; }
     
     .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-link { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); position: pointer; }
+    .nav-link { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
     .nav-link:hover, .nav-link.active { color: var(--accent-red); text-shadow: 0 0 8px var(--accent-glow); }
 
     .nav-socials {
@@ -73,14 +73,14 @@
     .btn-primary { background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red); }
     .btn-primary:hover { background: #a51212; box-shadow: 0 0 15px var(--accent-glow); transform: translateY(-2px); }
 
-    /* زر القائمة المنسدلة للجوال (مخفي بالشاشات الكبيرة) */
+    /* زر القائمة المنسدلة للجوال */
     .menu-toggle {
       display: none; background: none; border: none; color: #fff; font-size: 1.6rem; cursor: pointer;
       transition: var(--transition);
     }
     .menu-toggle:hover { color: var(--accent-red); }
 
-    /* Hero Section مع تأثيرات بصرية */
+    /* Hero Section */
     .hero {
       padding: 13rem 2rem 6rem; text-align: center;
       background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 75%);
@@ -108,13 +108,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* === التصميم والتجاوب الخاص بالتليفونات (Mobile Design) === */
+    /* === التصميم والتجاوب للتليفونات === */
     @media (max-width: 900px) {
       .menu-toggle { display: block; z-index: 1001; }
       
-      /* قائمة الجوال المنسدلة بتصميم منفصل وحركة انسيابية */
-      .nav-links, .nav-socials, .navbar .btn-primary {
-        position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+      /* القائمة الجانبية تظهر للروابط والسوشيال ميديا فقط، وزر السابسكرايب يفضل براها */
+      .nav-links, .nav-socials {
+        position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
         background: rgba(8, 8, 8, 0.98); backdrop-filter: blur(15px);
         flex-direction: column; align-items: center; justify-content: center;
         gap: 1.8rem; border-left: 1px solid var(--border-color);
@@ -122,15 +122,17 @@
         z-index: 1000; padding: 2rem; display: flex;
       }
       
-      /* عند تفعيل القائمة تظهر بحركة انزلاقية من اليمين */
-      .nav-links.mobile-active, .nav-socials.mobile-active, .navbar .btn-primary.mobile-active {
+      .nav-links.mobile-active, .nav-socials.mobile-active {
         right: 0;
       }
 
       .nav-links { font-size: 1.1rem; }
       .nav-link { font-size: 1.1rem; }
-      .nav-socials { border-left: none; border-top: 1px solid var(--border-color); padding-top: 1.5rem; width: 100%; justify-content: center; flex-direction: row; }
+      .nav-socials { border-left: none; border-top: 1px solid var(--border-color); padding-top: 1.5rem; width: 100%; justify-content: center; flex-direction: row; position: static; height: auto; background: transparent; backdrop-filter: none; }
       
+      /* إخفاء زر Subscribe العادي في الموبايل أو عرضه بشكل مناسب لو حابب، هنا هنسيبه يظهر فوق جنب اللوجو أو زر القائمة برا الليلة دي كلها */
+      .navbar .btn-primary { display: inline-flex; font-size: 0.65rem; padding: 0.4rem 0.8rem; }
+
       .hero { padding: 10rem 1.5rem 4rem; }
       .hero-title { font-size: 2.1rem; }
     }
@@ -146,7 +148,7 @@
         <span class="logo-text">SOLIMAN NIGHTMARES</span>
       </a>
       
-      <!-- زر القائمة للجوال مع تأثير حركي للتحويل إلى علامة إغلاق (X) -->
+      <!-- زر القائمة للجوال -->
       <button class="menu-toggle" aria-label="Open Menu">☰</button>
       
       <ul class="nav-links">
@@ -189,21 +191,17 @@
     <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
-  <!-- سكربت متقدم ومتحرك لتشغيل قائمة الجوال المؤثرة وتغيير شكل الزر -->
+  <!-- سكربت التشغيل -->
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const navSocials = document.querySelector('.nav-socials');
-    const subscribeBtn = document.querySelector('.navbar .btn-primary');
 
     if (menuToggle) {
       menuToggle.addEventListener('click', () => {
-        // تبديل الكلاسات الخاصة بالحركة الانزلاقية للموبايل
         navLinks.classList.toggle('mobile-active');
         navSocials.classList.toggle('mobile-active');
-        if (subscribeBtn) subscribeBtn.classList.toggle('mobile-active');
 
-        // تأثير حركي لزر القائمة (يتحول من ☰ إلى × والعكس)
         if (navLinks.classList.contains('mobile-active')) {
           menuToggle.textContent = '✕';
           menuToggle.style.color = 'var(--accent-red)';
@@ -213,12 +211,10 @@
         }
       });
 
-      // إغلاق القائمة تلقائياً عند الضغط على أي رابط داخلها
       document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
           navLinks.classList.remove('mobile-active');
           navSocials.classList.remove('mobile-active');
-          if (subscribeBtn) subscribeBtn.classList.remove('mobile-active');
           menuToggle.textContent = '☰';
           menuToggle.style.color = '#fff';
         });
