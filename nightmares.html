@@ -92,7 +92,7 @@
       background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; transition: var(--transition);
     }
     .nightmare-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
-    .nightmare-img { height: 200px; background-size: cover; background-position: center; filter: grayscale(20%); }
+    .nightmare-img { height: 200px; background-size: cover; background-position: center; filter: grayscale(10%); }
     .nightmare-body { padding: 2rem; }
     .nightmare-title { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 1rem; color: #fff; }
     .nightmare-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
@@ -138,68 +138,8 @@
     </header>
 
     <div class="container">
-      <div class="nightmares-grid">
-        
-        <!-- الكابوس الأول -->
-        <div class="nightmare-card">
-          <div class="nightmare-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80')"></div>
-          <div class="nightmare-body">
-            <h3 class="nightmare-title">ملف الكابوس الأول</h3>
-            <p class="nightmare-text">أسرار وملفات مرعبة تأخذك في رحلة إلى أعماق الظلام والغموض غير المفسر.</p>
-            <a href="https://youtu.be/OlGaT90esRc?si=1i7lxo7HceTL_PSC" class="btn btn-primary" target="_blank">شاهد الحلقة</a>
-          </div>
-        </div>
-
-        <!-- الكابوس الثاني -->
-        <div class="nightmare-card">
-          <div class="nightmare-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80')"></div>
-          <div class="nightmare-body">
-            <h3 class="nightmare-title">ملف الكابوس الثاني</h3>
-            <p class="nightmare-text">قصص وأحداث غريبة تتكشف تفاصيلها المظلمة تدريجياً لتكشف عن الحقائق المخفية.</p>
-            <a href="https://youtu.be/OaaUu0xrVjA?si=AougYujrUq7wKiox" class="btn btn-primary" target="_blank">شاهد الحلقة</a>
-          </div>
-        </div>
-
-        <!-- الكابوس الثالث -->
-        <div class="nightmare-card">
-          <div class="nightmare-img" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80')"></div>
-          <div class="nightmare-body">
-            <h3 class="nightmare-title">ملف الكابوس الثالث</h3>
-            <p class="nightmare-text">أحداث مرعبة ولقطات تحمل في طياتها الكثير من الغموض الذي يتطلب الشجاعة لمواجهته.</p>
-            <a href="https://youtu.be/3_ZZmgDVuys?si=1jxq2iY02AIthNKZ" class="btn btn-primary" target="_blank">شاهد الحلقة</a>
-          </div>
-        </div>
-
-        <!-- الكابوس الرابع -->
-        <div class="nightmare-card">
-          <div class="nightmare-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80')"></div>
-          <div class="nightmare-body">
-            <h3 class="nightmare-title">ملف الكابوس الرابع</h3>
-            <p class="nightmare-text">توثيق لأخطر الأسرار والقصص التي تجعل العقل البشري يقف عاجزاً عن التفسير.</p>
-            <a href="https://youtu.be/JCw0qC-QOFE?si=L3spflMh5_YwZs_P" class="btn btn-primary" target="_blank">شاهد الحلقة</a>
-          </div>
-        </div>
-
-        <!-- الكابوس الخامس -->
-        <div class="nightmare-card">
-          <div class="nightmare-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80')"></div>
-          <div class="nightmare-body">
-            <h3 class="nightmare-title">ملف الكابوس الخامس</h3>
-            <p class="nightmare-text">رحلة استكشافية داخل عوالم مظلمة مليئة بالقصص والألغاز الغامضة.</p>
-            <a href="https://youtu.be/c1uWwPK2PaU?si=AdPTomHS4woROg73" class="btn btn-primary" target="_blank">شاهد الحلقة</a>
-          </div>
-        </div>
-
-        <!-- الكابوس السادس -->
-        <div class="nightmare-card">
-          <div class="nightmare-img" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80')"></div>
-          <div class="nightmare-body">
-            <h3 class="nightmare-title">ملف الكابوس السادس</h3>
-            <p class="nightmare-text">النهاية المؤقتة للأرشيف المظلم.. قصص تترك أثراً في النفس لا يمحى بسهولة.</p>
-            <a href="https://youtu.be/gXq5FRoM45M?si=C6yd49mnTDdjJ_W4" class="btn btn-primary" target="_blank">شاهد الحلقة</a>
-          </div>
-        </div>
-
+      <div class="nightmares-grid" id="videosGrid">
+        <!-- سيتم توليد الكروت تلقائياً بالصور الحقيقية لكل فيديو -->
       </div>
     </div>
   </main>
@@ -208,5 +148,67 @@
     <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
+  <script>
+    // قائمة الفيديوهات الخاصة بك باللينكات والعناوين والوصف
+    const videos = [
+      {
+        url: "https://youtu.be/OlGaT90esRc?si=1i7lxo7HceTL_PSC",
+        title: "كابوس الأقبية المظلمة",
+        desc: "أسرار وملفات مرعبة تأخذك في رحلة إلى أعماق الظлам والغموض غير المفسر."
+      },
+      {
+        url: "https://youtu.be/OaaUu0xrVjA?si=AougYujrUq7wKiox",
+        title: "أصوات من خلف الجدران",
+        desc: "قصص وأحداث غريبة تتكشف تفاصيلها المظلمة تدريجياً لتكشف عن الحقائق المخفية."
+      },
+      {
+        url: "https://youtu.be/3_ZZmgDVuys?si=1jxq2iY02AIthNKZ",
+        title: "رحلة إلى العوالم السفلية",
+        desc: "أحداث مرعبة ولقطات تحمل في طياتها الكثير من الغموض الذي يتطلب الشجاعة لمواجهته."
+      },
+      {
+        url: "https://youtu.be/JCw0qC-QOFE?si=L3spflMh5_YwZs_P",
+        title: "أسرار الكهف المهجور",
+        desc: "توثيق لأخطر الأسرار والقصص التي تجعل العقل البشري يقف عاجزاً عن التفسير."
+      },
+      {
+        url: "https://youtu.be/c1uWwPK2PaU?si=AdPTomHS4woROg73",
+        title: "بوابة المجهول",
+        desc: "رحلة استكشافية داخل عوالم مظلمة مليئة بالقصص والألغاز الغامضة."
+      },
+      {
+        url: "https://youtu.be/gXq5FRoM45M?si=C6yd49mnTDdjJ_W4",
+        title: "النهاية المظلمة للأرشيف",
+        desc: "النهاية المؤقتة للأرشيف المظلم.. قصص تترك أثراً في النفس لا يمحى بسهولة."
+      }
+    ];
+
+    // دالة لاستخراج معرف الفيديو من رابط يوتيوب وجلب صورته الرسمية تلقائياً
+    function getYouTubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    const grid = document.getElementById('videosGrid');
+
+    videos.forEach(video => {
+      const videoId = getYouTubeId(video.url);
+      // رابط الصورة المصغرة الرسمية عالية الجودة من يوتيوب
+      const thumbUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80';
+
+      const card = document.createElement('div');
+      card.className = 'nightmare-card';
+      card.innerHTML = `
+        <div class="nightmare-img" style="background-image: url('${thumbUrl}')"></div>
+        <div class="nightmare-body">
+          <h3 class="nightmare-title">${video.title}</h3>
+          <p class="nightmare-text">${video.desc}</p>
+          <a href="${video.url}" class="btn btn-primary" target="_blank">شاهد الحلقة</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
 </body>
 </html>
