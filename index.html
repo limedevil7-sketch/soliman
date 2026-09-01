@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Soliman Nightmares | كوابيس سليمان</title>
   <link rel="icon" href="images/logo.jfif" type="image/jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --bg-deep: #050505;
       --bg-card: #0c0c0c;
-      --bg-hover: #141414;
       --border-color: #222222;
       --accent-red: #c91818;
       --accent-glow: rgba(201, 24, 24, 0.4);
@@ -19,7 +18,7 @@
       --text-muted: #888888;
       --font-heading: 'Cinzel', 'Noto Sans Arabic', serif;
       --font-body: 'Inter', 'Noto Sans Arabic', sans-serif;
-      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition: all 0.3s ease;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,107 +33,78 @@
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
 
-    /* Navbar عام */
+    /* Navbar الاحترافي */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%;
       background: rgba(5, 5, 5, 0.95);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
       z-index: 1000;
     }
     .nav-container {
-      max-width: 1300px; margin: 0 auto; padding: 0.8rem 1.5rem;
+      max-width: 1300px; margin: 0 auto; padding: 0.8rem 2rem;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
-    .logo-img { border-radius: 4px; object-fit: cover; transition: var(--transition); }
-    .logo-img:hover { transform: scale(1.05); box-shadow: 0 0 10px var(--accent-glow); }
+
+    /* 1. اللوجو على اليمين */
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; order: 1; }
+    .logo-img { border-radius: 4px; object-fit: cover; }
     .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; font-size: 0.95rem; color: #fff; }
     
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    /* 2. الروابط في المنتصف */
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; order: 2; }
     .nav-link { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
-    .nav-link:hover, .nav-link.active { color: var(--accent-red); text-shadow: 0 0 8px var(--accent-glow); }
+    .nav-link:hover, .nav-link.active { color: var(--accent-red); }
 
-    .nav-socials {
-      display: flex; gap: 0.5rem; align-items: center; margin-left: 10px; padding-left: 15px; border-left: 1px solid var(--border-color);
-    }
+    /* 3. مجموعة اليسار (السوشيال ميديا وزر الاشتراك) */
+    .nav-left-group { display: flex; align-items: center; gap: 1rem; order: 3; }
+    .nav-socials { display: flex; gap: 0.5rem; align-items: center; }
     .social-icon-btn {
       width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
       background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px;
       color: var(--text-muted); font-size: 0.75rem; transition: var(--transition);
     }
-    .social-icon-btn:hover { border-color: var(--accent-red); color: var(--accent-red); transform: translateY(-2px); }
+    .social-icon-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
 
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      display: inline-flex; align-items: center; justify-content: center;
       padding: 0.5rem 1.2rem; font-weight: 600; font-size: 0.75rem; letter-spacing: 1px;
       border-radius: 4px; transition: var(--transition); cursor: pointer;
     }
     .btn-primary { background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red); }
-    .btn-primary:hover { background: #a51212; box-shadow: 0 0 15px var(--accent-glow); transform: translateY(-2px); }
+    .btn-primary:hover { background: #a51212; box-shadow: 0 0 12px var(--accent-glow); }
 
-    /* زر القائمة المنسدلة للجوال */
+    /* زر القائمة للجوال */
     .menu-toggle {
-      display: none; background: none; border: none; color: #fff; font-size: 1.6rem; cursor: pointer;
-      transition: var(--transition);
+      display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; order: 4;
     }
-    .menu-toggle:hover { color: var(--accent-red); }
 
     /* Hero Section */
     .hero {
       padding: 13rem 2rem 6rem; text-align: center;
       background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 75%);
       border-bottom: 1px solid var(--border-color);
-      animation: fadeIn 1.2s ease-out;
     }
-    .hero-title { 
-      font-family: var(--font-heading); font-size: 3rem; margin-bottom: 1.5rem; color: #fff;
-      text-shadow: 0 0 20px rgba(201, 24, 24, 0.2);
-    }
+    .hero-title { font-family: var(--font-heading); font-size: 3rem; margin-bottom: 1.5rem; color: #fff; }
     .hero-desc { color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem; font-size: 1.05rem; }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
-    
     .content-card {
       background: var(--bg-card); border: 1px solid var(--border-color); padding: 3rem; border-radius: 8px; text-align: center;
-      transition: var(--transition);
     }
-    .content-card:hover { border-color: var(--accent-red); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
 
     .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === التصميم والتجاوب للتليفونات === */
+    /* التجاوب مع الموبايل */
     @media (max-width: 900px) {
-      .menu-toggle { display: block; z-index: 1001; }
-      
-      /* القائمة الجانبية تظهر للروابط والسوشيال ميديا فقط، وزر السابسكرايب يفضل براها */
-      .nav-links, .nav-socials {
-        position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
-        background: rgba(8, 8, 8, 0.98); backdrop-filter: blur(15px);
-        flex-direction: column; align-items: center; justify-content: center;
-        gap: 1.8rem; border-left: 1px solid var(--border-color);
-        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        z-index: 1000; padding: 2rem; display: flex;
+      .menu-toggle { display: block; }
+      .nav-links, .nav-left-group {
+        display: none; position: absolute; top: 100%; left: 0; width: 100%;
+        background: rgba(5, 5, 5, 0.98); flex-direction: column; align-items: center;
+        padding: 1.5rem 0; border-bottom: 1px solid var(--border-color); gap: 1rem;
       }
-      
-      .nav-links.mobile-active, .nav-socials.mobile-active {
-        right: 0;
-      }
-
-      .nav-links { font-size: 1.1rem; }
-      .nav-link { font-size: 1.1rem; }
-      .nav-socials { border-left: none; border-top: 1px solid var(--border-color); padding-top: 1.5rem; width: 100%; justify-content: center; flex-direction: row; position: static; height: auto; background: transparent; backdrop-filter: none; }
-      
-      /* إخفاء زر Subscribe العادي في الموبايل أو عرضه بشكل مناسب لو حابب، هنا هنسيبه يظهر فوق جنب اللوجو أو زر القائمة برا الليلة دي كلها */
-      .navbar .btn-primary { display: inline-flex; font-size: 0.65rem; padding: 0.4rem 0.8rem; }
-
-      .hero { padding: 10rem 1.5rem 4rem; }
-      .hero-title { font-size: 2.1rem; }
+      .nav-links.active, .nav-left-group.active { display: flex; }
+      .nav-left-group { flex-direction: column; }
     }
   </style>
 </head>
@@ -143,14 +113,17 @@
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
+      
+      <!-- 1. اللوجو (على اليمين) -->
       <a href="index.html" class="nav-logo">
         <img src="images/logo.jfif" alt="Logo" class="logo-img" width="40" height="40">
         <span class="logo-text">SOLIMAN NIGHTMARES</span>
       </a>
-      
-      <!-- زر القائمة للجوال -->
+
+      <!-- زر الموبايل -->
       <button class="menu-toggle" aria-label="Open Menu">☰</button>
       
+      <!-- 2. الروابط (في المنتصف) -->
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="nightmares.html" class="nav-link">Nightmares</a></li>
@@ -160,14 +133,17 @@
         <li><a href="about.html" class="nav-link">About</a></li>
       </ul>
 
-      <div class="nav-socials">
-        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="social-icon-btn" target="_blank" title="YouTube">YT</a>
-        <a href="https://t.me/+Di-kNOxDldE0OTk0" class="social-icon-btn" target="_blank" title="Telegram">TG</a>
-        <a href="https://discord.gg/bXbSysEwa" class="social-icon-btn" target="_blank" title="Discord">DC</a>
-        <a href="https://www.facebook.com/share/1ZWHfsjDSw/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" title="Facebook">FB</a>
+      <!-- 3. مجموعة اليسار (السوشيال + زر الاشتراك) -->
+      <div class="nav-left-group">
+        <div class="nav-socials">
+          <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="social-icon-btn" target="_blank" title="YouTube">YT</a>
+          <a href="https://t.me/+Di-kNOxDldE0OTk0" class="social-icon-btn" target="_blank" title="Telegram">TG</a>
+          <a href="https://discord.gg/bXbSysEwa" class="social-icon-btn" target="_blank" title="Discord">DC</a>
+          <a href="https://www.facebook.com/share/1ZWHfsjDSw/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" title="Facebook">FB</a>
+        </div>
+        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">SUBSCRIBE</a>
       </div>
-      
-      <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">SUBSCRIBE</a>
+
     </div>
   </nav>
 
@@ -191,33 +167,23 @@
     <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
-  <!-- سكربت التشغيل -->
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const navSocials = document.querySelector('.nav-socials');
+    const navLeftGroup = document.querySelector('.nav-left-group');
 
     if (menuToggle) {
       menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('mobile-active');
-        navSocials.classList.toggle('mobile-active');
-
-        if (navLinks.classList.contains('mobile-active')) {
+        navLinks.classList.toggle('active');
+        navLeftGroup.classList.toggle('active');
+        
+        if (navLinks.classList.contains('active')) {
           menuToggle.textContent = '✕';
           menuToggle.style.color = 'var(--accent-red)';
         } else {
           menuToggle.textContent = '☰';
           menuToggle.style.color = '#fff';
         }
-      });
-
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('mobile-active');
-          navSocials.classList.remove('mobile-active');
-          menuToggle.textContent = '☰';
-          menuToggle.style.color = '#fff';
-        });
       });
     }
   </script>
