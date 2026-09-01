@@ -92,7 +92,7 @@
       background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; transition: var(--transition);
     }
     .story-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
-    .story-img { height: 200px; background-size: cover; background-position: center; filter: grayscale(20%); }
+    .story-img { height: 200px; background-size: cover; background-position: center; filter: grayscale(10%); }
     .story-body { padding: 2rem; }
     .story-title { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 1rem; color: #fff; }
     .story-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
@@ -138,33 +138,8 @@
     </header>
 
     <div class="container">
-      <div class="stories-grid">
-        <div class="story-card">
-          <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=800&q=80')"></div>
-          <div class="story-body">
-            <h3 class="story-title">حكاية الليلة الأخيرة</h3>
-            <p class="story-text">رواية قصيرة عن قطار يتوقف في محطة غير موجودة بجدول الرحلات الرسمي ويصعد إليها ركاب غريبون.</p>
-            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">اقرأ / استمع</a>
-          </div>
-        </div>
-
-        <div class="story-card">
-          <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80')"></div>
-          <div class="story-body">
-            <h3 class="story-title">الظل الذي يتبعني</h3>
-            <p class="story-text">قصة درامية مرعبة عن انعكاس في المرايا يبدأ بالتصرف بشكل مستقل عن الشخص الحقيقي.</p>
-            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">اقرأ / استمع</a>
-          </div>
-        </div>
-
-        <div class="story-card">
-          <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80')"></div>
-          <div class="story-body">
-            <h3 class="story-title">أسرار الغرفة رقم 404</h3>
-            <p class="story-text">ماذا يحدث نزلاء أحد الفنادق القديمة عندما يغامرون بفتح باب الغرفة المحرمة؟</p>
-            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">اقرأ / استمع</a>
-          </div>
-        </div>
+      <div class="stories-grid" id="storiesGrid">
+        <!-- سيتم توليد حكايات وقصص القناة أوتوماتيكياً بالصور الحقيقية -->
       </div>
     </div>
   </main>
@@ -173,5 +148,66 @@
     <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
+  <script>
+    // قائمة روابط القصص المرعبة الخاصة بك
+    const storyVideos = [
+      {
+        url: "https://youtu.be/zUaEvOoMmcA?si=QtwMNeYOkYHWXt1Q",
+        title: "حكاية الليلة الأخيرة",
+        desc: "رواية مرعبة عن أحداث غامضة تتكشف تفاصيلها المظلمة تدريجياً."
+      },
+      {
+        url: "https://youtu.be/6Yb1oNq0bro?si=yJJZuBhSZeYWbguC",
+        title: "الظل الخفي في الزاوية",
+        desc: "قصة مشوقة تأخذك إلى أعمق زوايا الخوف والغموض غير المفسر."
+      },
+      {
+        url: "https://youtu.be/k6kTNJFWdz8?si=KVjRPa5gG1lQvVV6",
+        title: "أسرار الغرفة المغلقة",
+        desc: "ماذا يدور خلف الأبواب المغلقة في تلك الليلة الموحشة؟ تفاصيل ترتجف لها القلوب."
+      },
+      {
+        url: "https://youtu.be/Vm8FFMKsNrk?si=adXaGb6c0WS2Fta_",
+        title: "أصوات المنتصف الليل",
+        desc: "رسائل وأصوات قادمة من المجهول تجعل العقل البشري يقف عاجزاً عن التفسير."
+      },
+      {
+        url: "https://youtu.be/jq1RKljVyeA?si=wSkwqmnKaZdp-hSw",
+        title: "بوابة الكوابيس المنسية",
+        desc: "رحلة مرعبة داخل أعماق الحكايات التي لا تجرؤ على سماعها وحدك."
+      },
+      {
+        url: "https://youtu.be/Q1RECVqE9aI?si=rRPdjO3pfin05bNZ",
+        title: "النهاية المرعبة للرحلة",
+        desc: "قصة أخيرة تترك أثراً عميقاً في النفس ويبقى غموضها عالقاً للأبد."
+      }
+    ];
+
+    // استخراج معرف يوتيوب وجلب الصورة المصغرة أوتوماتيكياً
+    function getYouTubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    const grid = document.getElementById('storiesGrid');
+
+    storyVideos.forEach(video => {
+      const videoId = getYouTubeId(video.url);
+      const thumbUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : 'https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=800&q=80';
+
+      const card = document.createElement('div');
+      card.className = 'story-card';
+      card.innerHTML = `
+        <div class="story-img" style="background-image: url('${thumbUrl}')"></div>
+        <div class="story-body">
+          <h3 class="story-title">${video.title}</h3>
+          <p class="story-text">${video.desc}</p>
+          <a href="${video.url}" class="btn btn-primary" target="_blank">اقرأ / استمع</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
 </body>
 </html>
