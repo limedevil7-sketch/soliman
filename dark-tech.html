@@ -92,7 +92,7 @@
       background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; transition: var(--transition);
     }
     .tech-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
-    .tech-img { height: 200px; background-size: cover; background-position: center; filter: grayscale(20%); }
+    .tech-img { height: 200px; background-size: cover; background-position: center; filter: grayscale(10%); }
     .tech-body { padding: 2rem; }
     .tech-title { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 1rem; color: #fff; }
     .tech-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
@@ -138,33 +138,8 @@
     </header>
 
     <div class="container">
-      <div class="tech-grid">
-        <div class="tech-card">
-          <div class="tech-img" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80')"></div>
-          <div class="tech-body">
-            <h3 class="tech-title">ثغرات الأجهزة الذكية</h3>
-            <p class="tech-text">كيف يتم استغلال الميكروفونات والكاميرات في أبسط الأجهزة المنزلية للتجسس خفية.</p>
-            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">استكشاف الملف</a>
-          </div>
-        </div>
-
-        <div class="tech-card">
-          <div class="tech-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80')"></div>
-          <div class="tech-body">
-            <h3 class="tech-title">خوارزميات التحكم بالعقول</h3>
-            <p class="tech-text">دراسة تحليلية لطرق توجيه الإعلانات والمحتوى لبرمجة سلوك المستخدمين على منصات التواصل.</p>
-            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">استكشاف الملف</a>
-          </div>
-        </div>
-
-        <div class="tech-card">
-          <div class="tech-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80')"></div>
-          <div class="tech-body">
-            <h3 class="tech-title">أسرار الشبكات المجهولة</h3>
-            <p class="tech-text">كيف تعمل بروتوكولات التخفي والأنفاق الرقمية المعقدة في أعماق الشبكة العنكبوتية.</p>
-            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">استكشاف الملف</a>
-          </div>
-        </div>
+      <div class="tech-grid" id="techGrid">
+        <!-- سيتم توليد كروت التقنية المظلمة تلقائياً بالصور الحقيقية -->
       </div>
     </div>
   </main>
@@ -173,5 +148,66 @@
     <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
+  <script>
+    // قائمة فيديوهات الدارك تيك الخاصة بك
+    const techVideos = [
+      {
+        url: "https://youtu.be/3sNfGOSQxwo?si=-gzsHzkVdXhnNiuf",
+        title: "خبايا وأسرار التقنية المظلمة",
+        desc: "كيف يتم استغلال الثغرات الرقمية في أبسط الأنظمة للتجسس وخداع المستخدمين."
+      },
+      {
+        url: "https://youtu.be/iHJavBQP9u8?si=szqL79gh7oZtXJSq",
+        title: "البرمجيات الخفية والأكواد المرعبة",
+        desc: "رحلة داخل الأعماق البرمجية وكيف تعمل الخوارزميات الخفية في السيطرة على البيانات."
+      },
+      {
+        url: "https://youtu.be/iYGZUZJM6JE?si=P_j1y9ZXDekByvpM",
+        title: "كواليس الأمن السيبراني المظلم",
+        desc: "أسرار خطيرة عن الاختراق والأنظمة الأمنية التي تدار خلف الكواليس."
+      },
+      {
+        url: "https://youtu.be/DdV7MTh7zT4?si=BPF1-",
+        title: "الذكاء الاصطناعي والتحكم الرقمي",
+        desc: "دراسة تحليلية لطرق توجيه التقنيات الحديثة لبرمجة سلوك الأفراد دون أن يشعروا."
+      },
+      {
+        url: "https://youtu.be/NCmyHDw8u30?si=145ytp4djBumPnVtm5Ivi_FPPqg",
+        title: "ملفات الشبكات المخفية",
+        desc: "كيف تعمل بروتوكولات التخفي والأنفاق الرقمية المعقدة في أعماق الشبكة."
+      },
+      {
+        url: "https://youtu.be/qWQX0hGmj9Y?si=jyntnf3yYGMnyGYu",
+        title: "نهاية العالم الرقمي",
+        desc: "أخطر التهديدات التكنولوجية التي يخشى الخبراء الحديث عنها علناً."
+      }
+    ];
+
+    // استخراج معرف يوتيوب وجلب الصورة المصغرة أوتوماتيكياً
+    function getYouTubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    const grid = document.getElementById('techGrid');
+
+    techVideos.forEach(video => {
+      const videoId = getYouTubeId(video.url);
+      const thumbUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80';
+
+      const card = document.createElement('div');
+      card.className = 'tech-card';
+      card.innerHTML = `
+        <div class="tech-img" style="background-image: url('${thumbUrl}')"></div>
+        <div class="tech-body">
+          <h3 class="tech-title">${video.title}</h3>
+          <p class="tech-text">${video.desc}</p>
+          <a href="${video.url}" class="btn btn-primary" target="_blank">استكشاف الملف</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
 </body>
 </html>
