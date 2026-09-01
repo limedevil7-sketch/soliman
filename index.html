@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Soliman Nightmares | عالم الرعب والغموض">
   <meta property="og:description" content="قصص الرعب، الغموض، وأسرار التكنولوجيا المظلمة. ادخل عالم الكوابيس.">
-  <meta property="og:image" content="/images/logo.jfif">
+  <meta property="og:image" content="images/logo.jfif">
   <meta property="og:url" content="https://solimannightmares.com/">
   <meta property="og:site_name" content="Soliman Nightmares">
   <meta property="og:locale" content="ar_AR">
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Soliman Nightmares">
   <meta name="twitter:description" content="قصص الرعب والغموض والتكنولوجيا المظلمة">
-  <meta name="twitter:image" content="/images/logo.jfif">
+  <meta name="twitter:image" content="images/logo.jfif">
   
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -42,12 +42,12 @@
   }
   </script>
   
-  <link rel="icon" href="/images/logo.jfif" type="image/jpeg">
+  <link rel="icon" href="images/logo.jfif" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- الدمج الداخلي لتصميم الـ CSS لضمان عدم ضياع المسارات نهائياً -->
+  <!-- التصميم الداخلي المحدث والشامل -->
   <style>
     :root {
       --bg-deep: #050505;
@@ -81,27 +81,38 @@
     /* Navbar */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%;
-      background: rgba(5, 5, 5, 0.9);
+      background: rgba(5, 5, 5, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
       z-index: 1000;
     }
     .nav-container {
-      max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+      max-width: 1300px; margin: 0 auto; padding: 0.8rem 2rem;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
     .logo-img { border-radius: 4px; object-fit: cover; }
-    .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 2px; font-size: 1.1rem; }
+    .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 2px; font-size: 1rem; }
     
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-link { color: var(--text-muted); font-size: 0.9rem; transition: var(--transition); }
+    .nav-links { display: flex; gap: 1.2rem; align-items: center; }
+    .nav-link { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
     .nav-link:hover, .nav-link.active { color: var(--accent-red); }
+
+    /* Social Icons in Nav */
+    .nav-socials {
+      display: flex; gap: 0.75rem; align-items: center; margin-left: 10px; padding-left: 15px; border-left: 1px solid var(--border-color);
+    }
+    .social-icon-btn {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px;
+      color: var(--text-muted); font-size: 0.8rem; transition: var(--transition);
+    }
+    .social-icon-btn:hover { border-color: var(--accent-red); color: var(--accent-red); box-shadow: 0 0 10px var(--accent-glow); }
     
     /* Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-      padding: 0.75rem 1.5rem; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px;
+      padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px;
       border-radius: 4px; transition: var(--transition); cursor: pointer;
     }
     .btn-primary { background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red); }
@@ -179,61 +190,54 @@
       .featured-card { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
+      .nav-socials { display: none; }
     }
   </style>
 </head>
 <body>
-  <!-- Screen Glitch Overlay for Easter Egg -->
-  <div id="easter-overlay" class="easter-overlay" aria-hidden="true"></div>
-  <div id="easter-message" class="easter-message" role="status" aria-live="polite"></div>
-
   <!-- Navigation -->
   <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="/" class="nav-logo" id="logo-trigger" aria-label="Soliman Nightmares Home">
-        <img src="/images/logo.jfif" alt="Soliman Nightmares Logo" class="logo-img" width="48" height="48">
+      <a href="index.html" class="nav-logo" aria-label="Soliman Nightmares Home">
+        <img src="images/logo.jfif" alt="Soliman Nightmares Logo" class="logo-img" width="40" height="40">
         <span class="logo-text">SOLIMAN NIGHTMARES</span>
       </a>
       
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      
       <ul class="nav-links" id="nav-links">
-        <li><a href="/" class="nav-link active" data-page="home">Home</a></li>
-        <li><a href="/pages/nightmares.html" class="nav-link" data-page="nightmares">Nightmares</a></li>
-        <li><a href="/pages/dark-tech.html" class="nav-link" data-page="dark-tech">Dark Tech</a></li>
-        <li><a href="/pages/stories.html" class="nav-link" data-page="stories">Stories</a></li>
-        <li><a href="/pages/messages.html" class="nav-link" data-page="messages">Messages</a></li>
-        <li><a href="/pages/about.html" class="nav-link" data-page="about">About</a></li>
-        <li><a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="nav-link nav-youtube" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="nightmares.html" class="nav-link">Nightmares</a></li>
+        <li><a href="dark-tech.html" class="nav-link">Dark Tech</a></li>
+        <li><a href="stories.html" class="nav-link">Stories</a></li>
+        <li><a href="messages.html" class="nav-link">Messages</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
       </ul>
+
+      <!-- Social Media Quick Links Header -->
+      <div class="nav-socials">
+        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="social-icon-btn" target="_blank" rel="noopener" title="YouTube">YT</a>
+        <a href="https://t.me/+Di-kNOxDldE0OTk0" class="social-icon-btn" target="_blank" rel="noopener" title="Telegram">TG</a>
+        <a href="https://discord.gg/bXbSysEwa" class="social-icon-btn" target="_blank" rel="noopener" title="Discord">DC</a>
+        <a href="https://www.facebook.com/share/1ZWHfsjDSw/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" rel="noopener" title="Facebook">FB</a>
+      </div>
       
       <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
-        WATCH ON YOUTUBE
+        SUBSCRIBE
       </a>
     </div>
   </nav>
 
   <main>
-    <!-- 01 HERO -->
+    <!-- HERO -->
     <section class="hero" id="hero">
-      <div class="hero-bg">
-        <div class="hero-fog"></div>
-        <div class="hero-particles" id="particles"></div>
-        <div class="hero-vignette"></div>
-        <div class="hero-grain"></div>
-        <div class="hero-scanlines"></div>
-      </div>
-      
+      <div class="hero-bg"></div>
       <div class="hero-content">
         <div class="hero-logo-wrap">
-          <img src="/images/logo.jfif" alt="Soliman Nightmares" class="hero-logo" id="hero-logo">
+          <img src="images/logo.jfif" alt="Soliman Nightmares" class="hero-logo">
         </div>
         
         <h1 class="hero-title">
           <span class="title-line">ENTER THE</span>
-          <span class="title-main glitch-text" data-text="NIGHTMARE">NIGHTMARE</span>
+          <span class="title-main">NIGHTMARE</span>
         </h1>
         
         <p class="hero-subtitle">
@@ -243,22 +247,16 @@
         
         <div class="hero-ctas">
           <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20"><path d="M8 5v14l11-7z"/></svg>
             WATCH ON YOUTUBE
           </a>
           <a href="#featured" class="btn btn-outline btn-lg">
             EXPLORE NIGHTMARES
           </a>
         </div>
-        
-        <div class="hero-scroll">
-          <span>SCROLL TO DESCEND</span>
-          <div class="scroll-indicator"></div>
-        </div>
       </div>
     </section>
 
-    <!-- 02 FEATURED NIGHTMARE -->
+    <!-- FEATURED -->
     <section class="section featured" id="featured">
       <div class="container">
         <div class="section-header">
@@ -277,163 +275,16 @@
             <p class="featured-desc">
               في عام 2024، ظهرت أنظمة مراقبة تعتمد على الذكاء الاصطناعي تدّعي أنها تحمي الخصوصية. 
               لكن البيانات أظهرت شيئًا مختلفًا تمامًا... نظام يتعلم من مخاوفك، ويتنبأ بتحركاتك قبل أن تفكر فيها.
-              هذه ليست نظرية مؤامرة. هذه وثائق مسربة من داخل الشركة.
             </p>
             <div class="featured-meta">
               <span class="meta-item">18:42</span>
               <span class="meta-item">15 أغسطس 2026</span>
-              <span class="meta-item category">DARK TECH</span>
             </div>
             <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank" rel="noopener">
               WATCH NOW
             </a>
           </div>
         </article>
-      </div>
-    </section>
-
-    <!-- 03 LATEST VIDEOS -->
-    <section class="section videos" id="videos">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">LATEST TRANSMISSIONS</span>
-          <h2 class="section-title">أحدث الكوابيس</h2>
-          <p class="section-desc">آخر القصص التي خرجت من الظلام</p>
-        </div>
-        
-        <div class="video-grid" id="video-grid">
-          <!-- Populated by JS -->
-        </div>
-        
-        <div class="section-cta" style="text-align: center; margin-top: 3rem;">
-          <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-outline" target="_blank" rel="noopener">
-            VIEW ALL ON YOUTUBE
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04 HORROR STORIES -->
-    <section class="section horror-stories" id="horror">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">NIGHTMARES</span>
-          <h2 class="section-title">قصص ستجعلك تفكر مرتين قبل أن تطفئ النور</h2>
-        </div>
-        
-        <div class="stories-editorial" id="horror-stories">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 DARK TECHNOLOGY -->
-    <section class="section dark-tech" id="dark-tech">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">DARK TECHNOLOGY</span>
-          <h2 class="section-title">WHEN TECHNOLOGY BECOMES THE NIGHTMARE</h2>
-          <p class="section-desc">الذكاء الاصطناعي · الإنترنت المظلم · المراقبة · المستقبل المرعب</p>
-        </div>
-        
-        <div class="tech-grid" id="tech-grid">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- 06 CATEGORIES -->
-    <section class="section categories" id="categories">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">EXPLORE</span>
-          <h2 class="section-title">اختر كابوسك</h2>
-        </div>
-        
-        <div class="category-grid" id="category-grid">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- 07 YOUTUBE CHANNEL -->
-    <section class="section youtube-section" id="youtube">
-      <div class="container">
-        <div class="youtube-card">
-          <img src="/images/logo.jfif" alt="Soliman Nightmares" class="youtube-logo">
-          <h2 class="youtube-title">SOLIMAN NIGHTMARES</h2>
-          <p class="youtube-handle">@solimannightmares</p>
-          <p class="youtube-desc">
-            القناة الرسمية لقصص الرعب والغموض والتكنولوجيا المظلمة. 
-            كل حلقة تفتح بابًا جديدًا إلى ما لا يجب أن يُفتح.
-          </p>
-          <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-            SUBSCRIBE ON YOUTUBE
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 08 COMMUNITY -->
-    <section class="section community" id="community">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">THE NIGHTMARE COMMUNITY</span>
-          <h2 class="section-title">القصص لا تنتهي عند الفيديو</h2>
-          <p class="section-desc">بعضها يبدأ بعد أن ينتهي.</p>
-        </div>
-        
-        <div class="community-grid" id="community-grid">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- 09 SOCIAL MEDIA HUB -->
-    <section class="section social-hub" id="social">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">JOIN THE COMMUNITY</span>
-          <h2 class="section-title">ابقَ على اتصال بالظلام</h2>
-        </div>
-        
-        <div class="social-grid" id="social-grid">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- 10 ABOUT -->
-    <section class="section about" id="about">
-      <div class="container" style="max-width: 800px; text-align: center;">
-        <span class="section-tag">WHAT LURKS IN THE DARK?</span>
-        <h2 class="section-title">عالم يجمع بين الرعب والتكنولوجيا</h2>
-        <div class="about-text" style="color: var(--text-muted); margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;">
-          <p>
-            Soliman Nightmares ليس مجرد قناة يوتيوب. إنه عالم يتقاطع فيه الرعب الكلاسيكي 
-            مع أخطر ما أنتجه العقل البشري: التكنولوجيا التي لا نفهم حدودها.
-          </p>
-          <p>
-            هنا نروي القصص التي تجعلك تشك في الظلال، وفي الخوارزميات التي تراقبك، 
-            وفي الأساطير التي تعود من خلال الشاشات. 
-            من أحداث غير مفسرة إلى سيناريوهات مستقبلية مرعبة، ومن الإنترنت المظلم إلى الذكاء الاصطناعي الذي يتعلم الخوف.
-          </p>
-          <p>
-            كل قصة هي دعوة لدخول عالم لا يوجد فيه ضوء آمن.
-          </p>
-        </div>
-        <a href="/pages/about.html" class="btn btn-outline">اقرأ المزيد</a>
-      </div>
-    </section>
-
-    <!-- 11 FINAL CTA -->
-    <section class="section final-cta" id="final-cta" style="text-align: center;">
-      <div class="container">
-        <h2 class="cta-title" style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem;">THE NEXT NIGHTMARE IS WAITING</h2>
-        <p class="cta-subtitle" style="color: var(--text-muted); margin-bottom: 2rem;">الكابوس التالي ينتظرك بالفعل</p>
-        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary btn-xl" target="_blank" rel="noopener">
-          WATCH ON YOUTUBE
-        </a>
       </div>
     </section>
   </main>
@@ -443,7 +294,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="/images/logo.jfif" alt="Soliman Nightmares">
+          <img src="images/logo.jfif" alt="Soliman Nightmares">
           <h3>SOLIMAN NIGHTMARES</h3>
           <p>عالم الرعب · الغموض · التكنولوجيا المظلمة</p>
         </div>
@@ -451,24 +302,22 @@
         <div class="footer-nav">
           <h4>Navigate</h4>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/pages/nightmares.html">Nightmares</a></li>
-            <li><a href="/pages/dark-tech.html">Dark Tech</a></li>
-            <li><a href="/pages/stories.html">Stories</a></li>
-            <li><a href="/pages/messages.html">Messages</a></li>
-            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="nightmares.html">Nightmares</a></li>
+            <li><a href="dark-tech.html">Dark Tech</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="messages.html">Messages</a></li>
+            <li><a href="about.html">About</a></li>
           </ul>
         </div>
         
         <div class="footer-categories">
           <h4>Categories</h4>
           <ul>
-            <li><a href="/pages/stories.html?cat=horror">Horror</a></li>
-            <li><a href="/pages/stories.html?cat=mystery">Mystery</a></li>
-            <li><a href="/pages/stories.html?cat=dark-tech">Dark Technology</a></li>
-            <li><a href="/pages/stories.html?cat=true-crime">True Crime</a></li>
-            <li><a href="/pages/stories.html?cat=dark-web">Dark Web</a></li>
-            <li><a href="/pages/stories.html?cat=future">Future Nightmares</a></li>
+            <li><a href="stories.html">Horror</a></li>
+            <li><a href="stories.html">Mystery</a></li>
+            <li><a href="stories.html">Dark Technology</a></li>
+            <li><a href="stories.html">True Crime</a></li>
           </ul>
         </div>
         
@@ -478,7 +327,6 @@
             <li><a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" target="_blank" rel="noopener">YouTube</a></li>
             <li><a href="https://t.me/+Di-kNOxDldE0OTk0" target="_blank" rel="noopener">Telegram</a></li>
             <li><a href="https://www.facebook.com/share/1ZWHfsjDSw/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook Page</a></li>
-            <li><a href="https://www.facebook.com/share/g/19GLRyEEYX/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook Group</a></li>
             <li><a href="https://discord.gg/bXbSysEwa" target="_blank" rel="noopener">Discord</a></li>
           </ul>
         </div>
@@ -487,15 +335,14 @@
       <div class="footer-bottom">
         <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
         <div class="footer-legal">
-          <a href="/pages/privacy.html">Privacy Policy</a>
-          <a href="/pages/terms.html">Terms of Use</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="./js/data.js"></script>
-  <script src="./js/main.js"></script>
-  <script src="./js/easter-egg.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
