@@ -89,11 +89,14 @@
       background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 8px; margin-bottom: 3rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
+    .message-form-card input[type="text"],
     .message-form-card textarea {
       width: 100%; background: var(--bg-deep); border: 1px solid var(--border-color); border-radius: 4px;
-      padding: 1rem; color: var(--text-main); font-family: var(--font-body); font-size: 0.95rem; resize: vertical; min-height: 120px;
+      padding: 0.9rem 1rem; color: var(--text-main); font-family: var(--font-body); font-size: 0.95rem; 
       outline: none; transition: var(--transition); margin-bottom: 1rem;
     }
+    .message-form-card textarea { resize: vertical; min-height: 120px; }
+    .message-form-card input[type="text"]:focus,
     .message-form-card textarea:focus { border-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-glow); }
 
     /* حائط الرسائل */
@@ -159,8 +162,9 @@
       <div class="message-form-card">
         <h3 style="font-family: var(--font-heading); margin-bottom: 1rem; font-size: 1.1rem; color: #fff;">أرسل رسالة إلى الكواليس</h3>
         <form id="messageForm">
+          <input type="text" id="authorInput" placeholder="اسمك المستعار أو الشبح (اختياري)..." maxlength="30">
           <textarea id="messageInput" placeholder="اكتب رسالتك الغامضة هنا..." required></textarea>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الرسالة باسم [شبح]</button>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الإشارة إلى الظلال</button>
         </form>
       </div>
 
@@ -197,6 +201,7 @@
     const db = getFirestore(app);
 
     const messageForm = document.getElementById('messageForm');
+    const authorInput = document.getElementById('authorInput');
     const messageInput = document.getElementById('messageInput');
     const messagesWall = document.getElementById('messagesWall');
 
@@ -204,15 +209,21 @@
     messageForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const text = messageInput.value.trim();
+      let authorName = authorInput.value.trim();
+      
       if (!text) return;
+      if (!authorName) {
+        authorName = "شبح";
+      }
 
       try {
         await addDoc(collection(db, "nightmare_messages"), {
-          author: "شبح",
+          author: authorName,
           text: text,
           createdAt: serverTimestamp()
         });
         messageInput.value = '';
+        authorInput.value = '';
       } catch (error) {
         console.error("خطأ أثناء إرسال الرسالة: ", error);
         alert("فشل إرسال الإشارة، تأكد من تفعيل Firestore Database في لوحة تحكم Firebase.");
@@ -237,7 +248,7 @@
         card.className = 'message-card';
         card.innerHTML = `
           <div class="message-header">
-            <span class="message-author">🥷 ${data.author || 'شبح'}</span>
+            <span class="message-author">🥷 ${escapeHtml(data.author || 'شبح')}</span>
             <span class="message-time">${timeString}</span>
           </div>
           <div class="message-body">${escapeHtml(data.text)}</div>
