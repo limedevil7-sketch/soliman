@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Soliman Nightmares | كوابيس سليمان</title>
   <link rel="icon" href="images/logo.jfif" type="image/jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-deep: #050505;
-      --bg-card: #0c0c0c;
-      --border-color: #222222;
-      --accent-red: #c91818;
-      --accent-glow: rgba(201, 24, 24, 0.4);
-      --text-main: #e0e0e0;
-      --text-muted: #888888;
+      --bg-deep: #030303;
+      --bg-card: #080808;
+      --bg-hover: #101010;
+      --border-color: #1c1c1c;
+      --accent-red: #e60000;
+      --accent-glow: rgba(230, 0, 0, 0.5);
+      --text-main: #f0f0f0;
+      --text-muted: #999999;
       --font-heading: 'Cinzel', 'Noto Sans Arabic', serif;
       --font-body: 'Inter', 'Noto Sans Arabic', sans-serif;
-      --transition: all 0.3s ease;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,84 +28,146 @@
       color: var(--text-main);
       font-family: var(--font-body);
       overflow-x: hidden;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
 
-    /* Navbar الاحترافي */
+    /* Navbar الخرافي */
     .navbar {
       position: fixed; top: 0; left: 0; width: 100%;
-      background: rgba(5, 5, 5, 0.95);
-      backdrop-filter: blur(10px);
+      background: rgba(3, 3, 3, 0.9);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
       z-index: 1000;
     }
     .nav-container {
-      max-width: 1300px; margin: 0 auto; padding: 0.8rem 2rem;
+      max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
       display: flex; align-items: center; justify-content: space-between;
     }
 
-    /* 1. اللوجو على اليمين */
-    .nav-logo { display: flex; align-items: center; gap: 0.75rem; order: 1; }
-    .logo-img { border-radius: 4px; object-fit: cover; }
-    .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; font-size: 0.95rem; color: #fff; }
+    /* 1. اللوجو على اليمين مع تأثير توهج */
+    .nav-logo { display: flex; align-items: center; gap: 0.85rem; order: 1; transition: var(--transition); }
+    .logo-img { border-radius: 6px; object-fit: cover; border: 1px solid var(--border-color); transition: var(--transition); }
+    .nav-logo:hover .logo-img { border-color: var(--accent-red); box-shadow: 0 0 15px var(--accent-glow); }
+    .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 1.5px; font-size: 1rem; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
     
     /* 2. الروابط في المنتصف */
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; order: 2; }
-    .nav-link { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
-    .nav-link:hover, .nav-link.active { color: var(--accent-red); }
-
-    /* 3. مجموعة اليسار (السوشيال ميديا وزر الاشتراك) */
-    .nav-left-group { display: flex; align-items: center; gap: 1rem; order: 3; }
-    .nav-socials { display: flex; gap: 0.5rem; align-items: center; }
-    .social-icon-btn {
-      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px;
-      color: var(--text-muted); font-size: 0.75rem; transition: var(--transition);
+    .nav-links { display: flex; gap: 2rem; align-items: center; order: 2; }
+    .nav-link { 
+      color: var(--text-muted); font-size: 0.85rem; font-weight: 500; 
+      transition: var(--transition); position: relative; padding: 0.2rem 0; 
     }
-    .social-icon-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px;
+      background: var(--accent-red); transition: var(--transition); box-shadow: 0 0 8px var(--accent-red);
+    }
+    .nav-link:hover, .nav-link.active { color: #fff; text-shadow: 0 0 10px var(--accent-glow); }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    /* 3. مجموعة اليسار (السوشيال + زر الاشتراك) */
+    .nav-left-group { display: flex; align-items: center; gap: 1.2rem; order: 3; }
+    .nav-socials { display: flex; gap: 0.6rem; align-items: center; }
+    .social-icon-btn {
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px;
+      color: var(--text-muted); font-size: 0.8rem; font-weight: 600; transition: var(--transition);
+    }
+    .social-icon-btn:hover { 
+      border-color: var(--accent-red); color: var(--accent-red); 
+      background: var(--bg-hover); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(230,0,0,0.2); 
+    }
 
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 0.5rem 1.2rem; font-weight: 600; font-size: 0.75rem; letter-spacing: 1px;
-      border-radius: 4px; transition: var(--transition); cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.6rem 1.4rem; font-weight: 600; font-size: 0.8rem; letter-spacing: 1.2px;
+      border-radius: 6px; transition: var(--transition); cursor: pointer; text-transform: uppercase;
     }
-    .btn-primary { background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red); }
-    .btn-primary:hover { background: #a51212; box-shadow: 0 0 12px var(--accent-glow); }
+    .btn-primary { 
+      background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red);
+      box-shadow: 0 0 10px rgba(230, 0, 0, 0.3);
+    }
+    .btn-primary:hover { 
+      background: #b30000; border-color: #ff1a1a;
+      box-shadow: 0 0 25px var(--accent-glow); transform: translateY(-2px); 
+    }
 
     /* زر القائمة للجوال */
     .menu-toggle {
-      display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; order: 4;
+      display: none; background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer; order: 4;
+      transition: var(--transition);
     }
+    .menu-toggle:hover { color: var(--accent-red); }
 
-    /* Hero Section */
+    /* Hero Section المميت */
     .hero {
-      padding: 13rem 2rem 6rem; text-align: center;
-      background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 75%);
+      position: relative;
+      padding: 15rem 2rem 8rem; text-align: center;
+      background: radial-gradient(circle at center, #1a0202 0%, var(--bg-deep) 70%);
       border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
     }
-    .hero-title { font-family: var(--font-heading); font-size: 3rem; margin-bottom: 1.5rem; color: #fff; }
-    .hero-desc { color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem; font-size: 1.05rem; }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 20%, rgba(230,0,0,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-title { 
+      font-family: var(--font-heading); font-size: 3.8rem; font-weight: 900; 
+      margin-bottom: 1.5rem; color: #fff; letter-spacing: 2px;
+      text-shadow: 0 0 30px rgba(230, 0, 0, 0.4), 0 0 60px rgba(0, 0, 0, 0.8);
+      animation: titleGlow 4s ease-in-out infinite alternate;
+    }
+    @keyframes titleGlow {
+      0% { text-shadow: 0 0 20px rgba(230,0,0,0.3); }
+      100% { text-shadow: 0 0 40px rgba(230,0,0,0.7), 0 0 10px #fff; }
+    }
+    .hero-desc { color: var(--text-muted); max-width: 750px; margin: 0 auto 2.5rem; font-size: 1.15rem; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+    /* Containers & Cards */
+    .container { max-width: 1300px; margin: 0 auto; padding: 5rem 2rem; }
     .content-card {
-      background: var(--bg-card); border: 1px solid var(--border-color); padding: 3rem; border-radius: 8px; text-align: center;
+      background: var(--bg-card); border: 1px solid var(--border-color); 
+      padding: 3.5rem; border-radius: 12px; text-align: center;
+      position: relative; transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .content-card:hover { 
+      border-color: var(--accent-red); 
+      box-shadow: 0 15px 40px rgba(230, 0, 0, 0.15); 
+      transform: translateY(-5px);
     }
 
     .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
-    /* التجاوب مع الموبايل */
-    @media (max-width: 900px) {
-      .menu-toggle { display: block; }
+    /* التجاوب مع الموبايل (Mobile Drawer الاحترافي) */
+    @media (max-width: 992px) {
+      .menu-toggle { display: block; z-index: 1001; }
+      
       .nav-links, .nav-left-group {
-        display: none; position: absolute; top: 100%; left: 0; width: 100%;
-        background: rgba(5, 5, 5, 0.98); flex-direction: column; align-items: center;
-        padding: 1.5rem 0; border-bottom: 1px solid var(--border-color); gap: 1rem;
+        position: fixed; top: 0; right: -100%; width: 85%; height: 100vh;
+        background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px);
+        flex-direction: column; align-items: center; justify-content: center;
+        padding: 3rem 2rem; border-left: 1px solid var(--border-color);
+        gap: 2rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 1000; display: flex;
       }
-      .nav-links.active, .nav-left-group.active { display: flex; }
-      .nav-left-group { flex-direction: column; }
+      
+      .nav-links.active, .nav-left-group.active { right: 0; }
+      
+      .nav-links { font-size: 1.2rem; }
+      .nav-link { font-size: 1.2rem; }
+      .nav-left-group { 
+        top: auto; bottom: 0; height: auto; width: 85%; padding: 2rem;
+        background: transparent; border-left: none; border-top: 1px solid var(--border-color);
+        flex-direction: row; justify-content: space-between; right: -100%;
+      }
+      .nav-left-group.active { right: 0; }
+      .nav-socials { gap: 0.8rem; }
+      
+      .hero { padding: 12rem 1.5rem 5rem; }
+      .hero-title { font-size: 2.5rem; }
     }
   </style>
 </head>
@@ -114,16 +177,16 @@
   <nav class="navbar">
     <div class="nav-container">
       
-      <!-- 1. اللوجو (على اليمين) -->
+      <!-- 1. اللوجو -->
       <a href="index.html" class="nav-logo">
-        <img src="images/logo.jfif" alt="Logo" class="logo-img" width="40" height="40">
+        <img src="images/logo.jfif" alt="Logo" class="logo-img" width="42" height="42">
         <span class="logo-text">SOLIMAN NIGHTMARES</span>
       </a>
 
-      <!-- زر الموبايل -->
+      <!-- زر القائمة للجوال -->
       <button class="menu-toggle" aria-label="Open Menu">☰</button>
       
-      <!-- 2. الروابط (في المنتصف) -->
+      <!-- 2. الروابط -->
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="nightmares.html" class="nav-link">Nightmares</a></li>
@@ -150,23 +213,24 @@
   <main>
     <header class="hero">
       <h1 class="hero-title">SOLIMAN NIGHTMARES</h1>
-      <p class="hero-desc">مرحباً بك في عالم كوابيس سليمان. استكشف أرشيف القصص المرعبة، خبايا التكنولوجيا المظلمة، والملفات السرية.</p>
-      <a href="nightmares.html" class="btn btn-primary" style="padding: 0.8rem 1.8rem; font-size: 0.9rem;">استكشف الكوابيس</a>
+      <p class="hero-desc">مرحباً بك في أعمق نقطة مظلمة على الويب. استكشف أرشيف الكوابيس، خبايا التكنولوجيا المحرمة، والملفات التي لم يجرؤ أحد على فتحها.</p>
+      <a href="nightmares.html" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 0.95rem;">ابدأ رحلة الرعب</a>
     </header>
 
     <div class="container">
       <div class="content-card">
-        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: #fff;">أحدث الإرساليات</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">تابع أحدث الحلقات والقصص المضافة على القناة الرسمية.</p>
-        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">الانتقال للقناة</a>
+        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem; color: #fff; letter-spacing: 1px;">أحدث الإرساليات والملفات</h3>
+        <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">تم رصد إشارات جديدة في الأرشيف. تابع أحدث الحلقات والقصص قبل أن يتم مسحها.</p>
+        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">الانتقال للقناة الرسمية</a>
       </div>
     </div>
   </main>
 
   <footer class="footer">
-    <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
+    <p>&copy; 2026 Soliman Nightmares. All rights reserved. | جميع الحقوق محفوظة لعالم الكوابيس.</p>
   </footer>
 
+  <!-- سكربت تفاعلي للقائمة الجانبية والموبايل -->
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -184,6 +248,16 @@
           menuToggle.textContent = '☰';
           menuToggle.style.color = '#fff';
         }
+      });
+
+      // إغلاق القائمة تلقائياً عند الضغط على أي رابط في الموبايل
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          navLeftGroup.classList.remove('active');
+          menuToggle.textContent = '☰';
+          menuToggle.style.color = '#fff';
+        });
       });
     }
   </script>
