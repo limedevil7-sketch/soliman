@@ -4,88 +4,146 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | Soliman Nightmares</title>
-  <meta name="description" content="ما يختبئ في الظلام — عالم Soliman Nightmares يجمع الرعب والغموض والتكنولوجيا المظلمة.">
-  <link rel="icon" href="../images/logo.jfif" type="image/jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="icon" href="images/logo.jfif" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-deep: #050505;
+      --bg-card: #0c0c0c;
+      --bg-hover: #141414;
+      --border-color: #222222;
+      --accent-red: #c91818;
+      --accent-glow: rgba(201, 24, 24, 0.3);
+      --text-main: #e0e0e0;
+      --text-muted: #888888;
+      --text-dim: #555555;
+      --font-heading: 'Cinzel', 'Noto Sans Arabic', serif;
+      --font-body: 'Inter', 'Noto Sans Arabic', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1300px; margin: 0 auto; padding: 0.8rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-img { border-radius: 4px; object-fit: cover; }
+    .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 2px; font-size: 1rem; color: #fff; }
+    
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-link { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
+    .nav-link:hover, .nav-link.active { color: var(--accent-red); }
+
+    .nav-socials {
+      display: flex; gap: 0.75rem; align-items: center; margin-left: 10px; padding-left: 15px; border-left: 1px solid var(--border-color);
+    }
+    .social-icon-btn {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px;
+      color: var(--text-muted); font-size: 0.8rem; transition: var(--transition);
+    }
+    .social-icon-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px;
+      border-radius: 4px; transition: var(--transition); cursor: pointer;
+    }
+    .btn-primary { background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red); }
+    .btn-primary:hover { background: #a51212; box-shadow: 0 0 15px var(--accent-glow); }
+
+    /* Page Header */
+    .page-header {
+      padding: 10rem 2rem 4rem; text-align: center; background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 70%);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .page-title { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+    .page-desc { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+    /* Content Container */
+    .container { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    
+    .about-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 3rem; margin-bottom: 2rem;
+    }
+    .about-card h3 { font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 1rem; }
+    .about-card p { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.8; }
+
+    /* Footer */
+    .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+  </style>
 </head>
 <body>
-  <div id="easter-overlay" class="easter-overlay" aria-hidden="true"></div>
-  <div id="easter-message" class="easter-message" role="status" aria-live="polite"></div>
 
-  <nav id="navbar" class="navbar scrolled">
+  <!-- Navigation -->
+  <nav class="navbar">
     <div class="nav-container">
-      <a href="../index.html" class="nav-logo" id="logo-trigger">
-        <img src="../images/logo.jfif" alt="Soliman Nightmares" class="logo-img" width="48" height="48">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jfif" alt="Logo" class="logo-img" width="40" height="40">
         <span class="logo-text">SOLIMAN NIGHTMARES</span>
       </a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="../index.html" class="nav-link">Home</a></li>
+      
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="nightmares.html" class="nav-link">Nightmares</a></li>
         <li><a href="dark-tech.html" class="nav-link">Dark Tech</a></li>
         <li><a href="stories.html" class="nav-link">Stories</a></li>
         <li><a href="messages.html" class="nav-link">Messages</a></li>
         <li><a href="about.html" class="nav-link active">About</a></li>
-        <li><a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="nav-link" target="_blank" rel="noopener">YouTube</a></li>
       </ul>
-      <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary nav-cta" target="_blank" rel="noopener">WATCH ON YOUTUBE</a>
+
+      <div class="nav-socials">
+        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="social-icon-btn" target="_blank" title="YouTube">YT</a>
+        <a href="https://t.me/+Di-kNOxDldE0OTk0" class="social-icon-btn" target="_blank" title="Telegram">TG</a>
+        <a href="https://discord.gg/bXbSysEwa" class="social-icon-btn" target="_blank" title="Discord">DC</a>
+        <a href="https://www.facebook.com/share/1ZWHfsjDSw/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" title="Facebook">FB</a>
+      </div>
+      
+      <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">SUBSCRIBE</a>
     </div>
   </nav>
 
-  <main style="padding-top: calc(72px + 3rem); min-height: 80vh;">
-    <div class="container">
-      <div class="about-content" style="max-width:720px;margin:0 auto;">
-        <span class="section-tag">WHAT LURKS IN THE DARK?</span>
-        <h1 class="section-title">Soliman Nightmares</h1>
-        
-        <div class="about-text">
-          <p>
-            Soliman Nightmares ليس مجرد قناة يوتيوب. إنه عالم يتقاطع فيه الرعب الكلاسيكي 
-            مع أخطر ما أنتجه العقل البشري: التكنولوجيا التي لا نفهم حدودها.
-          </p>
-          <p>
-            هنا نروي القصص التي تجعلك تشك في الظلال، وفي الخوارزميات التي تراقبك، 
-            وفي الأساطير التي تعود من خلال الشاشات. 
-            من أحداث غير مفسرة إلى سيناريوهات مستقبلية مرعبة، ومن الإنترنت المظلم إلى الذكاء الاصطناعي الذي يتعلم الخوف.
-          </p>
-          <p>
-            كل قصة هي دعوة لدخول عالم لا يوجد فيه ضوء آمن. 
-            نجمع بين Horror و Mystery و Dark Technology في تجربة واحدة متماسكة.
-          </p>
-          <p>
-            القصص لا تنتهي عند الفيديو... بعضها يبدأ بعد أن ينتهي.
-          </p>
-        </div>
+  <main>
+    <header class="page-header">
+      <h1 class="page-title">// ABOUT</h1>
+      <p class="page-desc">من نحن وما وراء كواليس قناة كوابيس سليمان.</p>
+    </header>
 
-        <div style="margin-top:3rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
-          <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank" rel="noopener">WATCH ON YOUTUBE</a>
-          <a href="messages.html" class="btn btn-outline">MESSAGES //</a>
-          <a href="../index.html" class="btn btn-outline">RETURN HOME</a>
-        </div>
+    <div class="container">
+      <div class="about-card">
+        <h3>قناة كوابيس سليمان</h3>
+        <p>نحن منصة رقمية متخصصة في سرد القصص المرعبة الغامضة، استكشاف خبايا التكنولوجيا المظلمة، وتقديم محتوى فريد ومثيرة للاهتمام يغوص في أعماق الألغاز التي لم تُحل بعد.</p>
+        <p>هدفنا بناء مجتمع متكامل من عشاق الغموض والتشويق، وتقديم تجربة بصرية وسمعية تستحق العناء لكل باحث عن الحقيقة في عالم الظلال.</p>
+        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">انضم لقناتنا على يوتيوب</a>
       </div>
     </div>
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom" style="border:none;padding-top:0;">
-        <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
-      </div>
-    </div>
+    <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
-  <script src="../js/easter-egg.js"></script>
-  <script>
-    const navToggle = document.getElementById('nav-toggle');
-    const navLinks = document.getElementById('nav-links');
-    if (navToggle) {
-      navToggle.addEventListener('click', () => {
-        const open = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.setAttribute('aria-expanded', String(!open));
-        navLinks.classList.toggle('open', !open);
-      });
-    }
-  </script>
 </body>
 </html>
