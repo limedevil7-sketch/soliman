@@ -1,7 +1,11 @@
 /* ============================================
    SOLIMAN NIGHTMARES — Design System
    Horror × Mystery × Dark Technology
-   ============================================ */
+============================================ */
+
+/* ============================================
+   VARIABLES
+============================================ */
 
 :root {
   /* Core Colors */
@@ -59,9 +63,10 @@
   --container: 1200px;
 }
 
+
 /* ============================================
    RESET & BASE
-   ============================================ */
+============================================ */
 
 *,
 *::before,
@@ -137,9 +142,10 @@ ol {
   color: #fff;
 }
 
+
 /* ============================================
    ACCESSIBILITY
-   ============================================ */
+============================================ */
 
 :focus-visible {
   outline: 2px solid var(--crimson);
@@ -158,9 +164,10 @@ ol {
   border: 0;
 }
 
+
 /* ============================================
    SCROLLBAR
-   ============================================ */
+============================================ */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -179,9 +186,10 @@ ol {
   background: var(--crimson);
 }
 
+
 /* ============================================
    TYPOGRAPHY
-   ============================================ */
+============================================ */
 
 h1,
 h2,
@@ -216,9 +224,10 @@ h4 {
   font-size: 1.05rem;
 }
 
+
 /* ============================================
    LAYOUT
-   ============================================ */
+============================================ */
 
 .container {
   width: 100%;
@@ -248,9 +257,10 @@ h4 {
   text-align: center;
 }
 
+
 /* ============================================
    BUTTONS
-   ============================================ */
+============================================ */
 
 .btn {
   position: relative;
@@ -320,9 +330,10 @@ h4 {
   height: 14px;
 }
 
+
 /* ============================================
    NAVBAR
-   ============================================ */
+============================================ */
 
 .navbar {
   position: fixed;
@@ -463,7 +474,9 @@ h4 {
   transform: translateY(-7px) rotate(-45deg);
 }
 
+
 /* Desktop Navbar */
+
 @media (min-width: 1024px) {
   .nav-links {
     display: flex;
@@ -484,7 +497,9 @@ h4 {
   }
 }
 
+
 /* Mobile Navbar */
+
 @media (max-width: 1023px) {
   .nav-links {
     position: fixed;
@@ -524,9 +539,10 @@ h4 {
   }
 }
 
+
 /* ============================================
    HERO
-   ============================================ */
+============================================ */
 
 .hero {
   position: relative;
@@ -613,13 +629,14 @@ h4 {
 .hero-scanlines {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
   pointer-events: none;
   opacity: 0.5;
   z-index: 1;
@@ -737,9 +754,10 @@ h4 {
   }
 }
 
+
 /* ============================================
    FEATURED NIGHTMARE
-   ============================================ */
+============================================ */
 
 .featured-card {
   display: grid;
@@ -786,20 +804,22 @@ h4 {
 .featured-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    transparent 40%,
-    var(--charcoal) 100%
-  );
+  background:
+    linear-gradient(
+      to right,
+      transparent 40%,
+      var(--charcoal) 100%
+    );
 }
 
 @media (max-width: 899px) {
   .featured-overlay {
-    background: linear-gradient(
-      to top,
-      var(--charcoal) 0%,
-      transparent 50%
-    );
+    background:
+      linear-gradient(
+        to top,
+        var(--charcoal) 0%,
+        transparent 50%
+      );
   }
 }
 
@@ -858,9 +878,10 @@ h4 {
   letter-spacing: 0.08em;
 }
 
+
 /* ============================================
    VIDEO GRID
-   ============================================ */
+============================================ */
 
 .video-grid {
   display: grid;
@@ -1015,9 +1036,10 @@ h4 {
   gap: 0.5rem;
 }
 
+
 /* ============================================
    HORROR STORIES EDITORIAL
-   ============================================ */
+============================================ */
 
 .stories-editorial {
   display: grid;
@@ -1054,12 +1076,13 @@ h4 {
 .story-card-large .story-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.3) 50%,
-    transparent 100%
-  );
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      transparent 100%
+    );
 }
 
 .story-card-large .story-content {
@@ -1091,9 +1114,10 @@ h4 {
   font-size: 0.9rem;
 }
 
+
 /* ============================================
    DARK TECH
-   ============================================ */
+============================================ */
 
 .dark-tech {
   background:
@@ -1143,12 +1167,13 @@ h4 {
   right: 0;
   left: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--crimson),
-    transparent
-  );
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--crimson),
+      transparent
+    );
   opacity: 0;
   transition: opacity 0.3s var(--ease);
 }
@@ -1184,9 +1209,10 @@ h4 {
   line-height: 1.6;
 }
 
+
 /* ============================================
    CATEGORIES
-   ============================================ */
+============================================ */
 
 .category-grid {
   display: grid;
@@ -1242,11 +1268,12 @@ h4 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8),
-    transparent 65%
-  );
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8),
+      transparent 65%
+    );
   pointer-events: none;
 }
 
@@ -1268,9 +1295,10 @@ h4 {
   font-size: 0.85rem;
 }
 
+
 /* ============================================
    YOUTUBE
-   ============================================ */
+============================================ */
 
 .youtube-card {
   position: relative;
@@ -1293,11 +1321,12 @@ h4 {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle at center,
-    rgba(196, 30, 58, 0.06) 0%,
-    transparent 50%
-  );
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(196, 30, 58, 0.06) 0%,
+      transparent 50%
+    );
   pointer-events: none;
 }
 
@@ -1328,9 +1357,10 @@ h4 {
   font-family: var(--font-arabic);
 }
 
+
 /* ============================================
    COMMUNITY & SOCIAL
-   ============================================ */
+============================================ */
 
 .community-grid,
 .social-grid {
@@ -1401,9 +1431,10 @@ h4 {
   font-size: 0.85rem;
 }
 
+
 /* ============================================
    ABOUT
-   ============================================ */
+============================================ */
 
 .about-content {
   max-width: 720px;
@@ -1423,9 +1454,10 @@ h4 {
   line-height: 1.8;
 }
 
+
 /* ============================================
    FINAL CTA
-   ============================================ */
+============================================ */
 
 .final-cta {
   position: relative;
@@ -1446,11 +1478,12 @@ h4 {
   left: 50%;
   width: 600px;
   height: 300px;
-  background: radial-gradient(
-    ellipse,
-    rgba(196, 30, 58, 0.15) 0%,
-    transparent 70%
-  );
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(196, 30, 58, 0.15) 0%,
+      transparent 70%
+    );
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -1475,9 +1508,10 @@ h4 {
   z-index: 2;
 }
 
+
 /* ============================================
    FOOTER
-   ============================================ */
+============================================ */
 
 .footer {
   padding: var(--space-3xl) 0 var(--space-xl);
@@ -1568,9 +1602,10 @@ h4 {
   color: var(--crimson);
 }
 
+
 /* ============================================
    EASTER EGG
-   ============================================ */
+============================================ */
 
 .easter-overlay {
   position: fixed;
@@ -1651,9 +1686,10 @@ h4 {
   transform: translate(-50%, -50%) scale(1);
 }
 
+
 /* ============================================
    MESSAGES PAGE
-   ============================================ */
+============================================ */
 
 .messages-page {
   min-height: 100vh;
@@ -1880,9 +1916,10 @@ h4 {
   opacity: 1;
 }
 
+
 /* ============================================
    VIDEO MODAL
-   ============================================ */
+============================================ */
 
 .video-modal {
   position: fixed;
@@ -1954,9 +1991,10 @@ h4 {
   }
 }
 
+
 /* ============================================
    RESPONSIVE
-   ============================================ */
+============================================ */
 
 @media (max-width: 640px) {
   :root {
@@ -2039,9 +2077,10 @@ h4 {
   }
 }
 
+
 /* ============================================
    REDUCED MOTION
-   ============================================ */
+============================================ */
 
 @media (prefers-reduced-motion: reduce) {
   *,
