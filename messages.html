@@ -76,16 +76,45 @@
 
     /* Page Content */
     .page-header {
-      padding: 10rem 2rem 4rem; text-align: center; background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 70%);
+      padding: 10rem 2rem 3rem; text-align: center; background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 70%);
       border-bottom: 1px solid var(--border-color);
     }
-    .page-title { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+    .page-title { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 0.5rem; color: #fff; }
     .page-desc { color: var(--text-muted); }
 
-    .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
+    .container { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
     
+    /* صندوق الإرسال */
+    .message-form-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 8px; margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .message-form-card textarea {
+      width: 100%; background: var(--bg-deep); border: 1px solid var(--border-color); border-radius: 4px;
+      padding: 1rem; color: var(--text-main); font-family: var(--font-body); font-size: 0.95rem; resize: vertical; min-height: 120px;
+      outline: none; transition: var(--transition); margin-bottom: 1rem;
+    }
+    .message-form-card textarea:focus { border-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-glow); }
+
+    /* حائط الرسائل */
+    .messages-wall { display: flex; flex-direction: column; gap: 1.5rem; }
+    .message-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem;
+      transition: var(--transition); animation: fadeIn 0.5s ease-out;
+    }
+    .message-card:hover { border-color: #333; }
+    .message-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+    .message-author { font-family: var(--font-heading); font-weight: 700; color: var(--accent-red); font-size: 0.95rem; }
+    .message-time { font-size: 0.75rem; color: var(--text-dim); font-family: var(--font-mono); }
+    .message-body { color: var(--text-main); font-size: 0.95rem; word-break: break-word; white-space: pre-wrap; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Footer */
-    .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+    .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-dim); font-size: رسائل الظلال; }
   </style>
 </head>
 <body>
@@ -120,15 +149,24 @@
 
   <main>
     <header class="page-header">
-      <h1 class="page-title">// MESSAGES</h1>
-      <p class="page-desc">رسائل الظلال من الاشباح</p>
+      <h1 class="page-title">// MESSAGES WALL</h1>
+      <p class="page-desc">راديو الأشباح المفتوح - اترك رسالتك في الظلال وسيرها الجميع</p>
     </header>
 
     <div class="container">
-      <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 8px; text-align: center;">
-        <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">أرسل رسالتك إلى الكواليس</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">هنا تظهر الرسائل الغامضة والاتصالات الواردة من أعماق الشبكة.</p>
-        <a href="index.html" class="btn btn-primary">العودة للرئيسية</a>
+      <!-- نموذج إرسال رسالة -->
+      <div class="message-form-card">
+        <h3 style="font-family: var(--font-heading); margin-bottom: 1rem; font-size: 1.1rem; color: #fff;">أرسل رسالة إلى الكواليس</h3>
+        <form id="messageForm">
+          <textarea id="messageInput" placeholder="اكتب رسالتك الغامضة هنا..." required></textarea>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الرسالة باسم [شبح]</button>
+        </form>
+      </div>
+
+      <!-- حائط الرسائل -->
+      <div class="messages-wall" id="messagesWall">
+        <!-- الرسائل بتظهر هنا تلقائياً -->
+        <div style="text-align: center; color: var(--text-muted); padding: 2rem;">جاري التقاط الإشارات من الأشباح...</div>
       </div>
     </div>
   </main>
@@ -137,5 +175,86 @@
     <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
+  <!-- ربط Firebase (مكتبات SDK) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // استبدل البيانات دي ببيانات مشروعك في Firebase
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // تهيئة الفايربيز
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const messageForm = document.getElementById('messageForm');
+    const messageInput = document.getElementById('messageInput');
+    const messagesWall = document.getElementById('messagesWall');
+
+    // إرسال الرسالة
+    messageForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = messageInput.value.trim();
+      if (!text) return;
+
+      try {
+        await addDoc(collection(db, "nightmare_messages"), {
+          author: "شبح",
+          text: text,
+          createdAt: serverTimestamp()
+        });
+        messageInput.value = '';
+      } catch (error) {
+        console.error("خطأ أثناء إرسال الرسالة: ", error);
+        alert("فشل إرسال الإشارة، تأكد من إعدادات قاعدة البيانات.");
+      }
+    });
+
+    // جلب وعرض الرسائل لحظياً (Realtime) للجميع
+    const q = query(collection(db, "nightmare_messages"), orderBy("createdAt", "desc"));
+    onSnapshot(q, (snapshot) => {
+      messagesWall.innerHTML = '';
+      if (snapshot.empty) {
+        messagesWall.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 2rem;">لا توجد رسائل في الظلال حالياً. كن أول شبح يكتب!</div>`;
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const dateObj = data.createdAt ? data.createdAt.toDate() : new Date();
+        const timeString = dateObj.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+        const card = document.createElement('div');
+        card.className = 'message-card';
+        card.innerHTML = `
+          <div class="message-header">
+            <span class="message-author">🥷 ${data.author || 'شبح'}</span>
+            <span class="message-time">${timeString}</span>
+          </div>
+          <div class="message-body">${escapeHtml(data.text)}</div>
+        `;
+        messagesWall.appendChild(card);
+      });
+    });
+
+    // حماية بسيطة لمنع الثغرات (XSS)
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+  </script>
 </body>
 </html>
