@@ -114,7 +114,7 @@
     }
 
     /* Footer */
-    .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-dim); font-size: رسائل الظلال; }
+    .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -150,7 +150,7 @@
   <main>
     <header class="page-header">
       <h1 class="page-title">// MESSAGES WALL</h1>
-      <p class="page-desc">راديو الأشباح المفتوح - اترك رسالتك في الظلال وسيرها الجميع</p>
+      <p class="page-desc">راديو الأشباح المفتوح - اترك رسالتك في الظلال وسيراها الجميع</p>
     </header>
 
     <div class="container">
@@ -175,19 +175,20 @@
     <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
-  <!-- ربط Firebase (مكتبات SDK) -->
+  <!-- سكربت Firebase المدمج -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // استبدل البيانات دي ببيانات مشروعك في Firebase
+    // إعدادات مشروعك الحقيقية
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyBpkZJ0ixkk8nt9ahJUW5JKoBIjSy3x8NY",
+      authDomain: "soliman-80759.firebaseapp.com",
+      projectId: "soliman-80759",
+      storageBucket: "soliman-80759.firebasestorage.app",
+      messagingSenderId: "1007270417596",
+      appId: "1:1007270417596:web:ac8c1b57a0f82bfe5a6cb9",
+      measurementId: "G-SY047RB43W"
     };
 
     // تهيئة الفايربيز
@@ -213,11 +214,11 @@
         messageInput.value = '';
       } catch (error) {
         console.error("خطأ أثناء إرسال الرسالة: ", error);
-        alert("فشل إرسال الإشارة، تأكد من إعدادات قاعدة البيانات.");
+        alert("فشل إرسال الإشارة، تأكد من تفعيل Firestore Database في لوحة تحكم Firebase.");
       }
     });
 
-    // جلب وعرض الرسائل لحظياً (Realtime) للجميع
+    // جلب وعرض الرسائل لحظياً للجميع
     const q = query(collection(db, "nightmare_messages"), orderBy("createdAt", "desc"));
     onSnapshot(q, (snapshot) => {
       messagesWall.innerHTML = '';
@@ -244,7 +245,7 @@
       });
     });
 
-    // حماية بسيطة لمنع الثغرات (XSS)
+    // حماية لمنع الثغرات
     function escapeHtml(text) {
       const map = {
         '&': '&amp;',
