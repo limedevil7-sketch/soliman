@@ -47,8 +47,140 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- تم تصحيح مسار الـ CSS ليدعم المسارات المطلقة والنسبية -->
-  <link rel="stylesheet" href="./css/main.css">
+  <!-- الدمج الداخلي لتصميم الـ CSS لضمان عدم ضياع المسارات نهائياً -->
+  <style>
+    :root {
+      --bg-deep: #050505;
+      --bg-card: #0c0c0c;
+      --bg-hover: #141414;
+      --border-color: #222222;
+      --border-glow: #3d0a0a;
+      --accent-red: #c91818;
+      --accent-glow: rgba(201, 24, 24, 0.3);
+      --text-main: #e0e0e0;
+      --text-muted: #888888;
+      --text-dim: #555555;
+      --font-heading: 'Cinzel', 'Noto Sans Arabic', serif;
+      --font-body: 'Inter', 'Noto Sans Arabic', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(5, 5, 5, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-img { border-radius: 4px; object-fit: cover; }
+    .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 2px; font-size: 1.1rem; }
+    
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-link { color: var(--text-muted); font-size: 0.9rem; transition: var(--transition); }
+    .nav-link:hover, .nav-link.active { color: var(--accent-red); }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px;
+      border-radius: 4px; transition: var(--transition); cursor: pointer;
+    }
+    .btn-primary { background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red); }
+    .btn-primary:hover { background: #a51212; box-shadow: 0 0 15px var(--accent-glow); }
+    .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-outline:hover { border-color: var(--accent-red); color: var(--accent-red); }
+    .btn-lg { padding: 1rem 2rem; font-size: 0.95rem; }
+    .btn-xl { padding: 1.25rem 2.5rem; font-size: 1.1rem; }
+
+    /* Hero Section */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem; overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 70%); }
+    .hero-content { max-width: 800px; z-index: 1; }
+    .hero-logo-wrap { margin-bottom: 2rem; display: inline-block; }
+    .hero-logo { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--accent-red); box-shadow: 0 0 20px var(--accent-glow); object-fit: cover; }
+    .hero-title { font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
+    .title-line { display: block; font-size: 0.4em; color: var(--text-muted); letter-spacing: 4px; margin-bottom: 0.5rem; }
+    .title-main { color: var(--text-main); text-shadow: 0 0 10px rgba(201, 24, 24, 0.5); }
+    .hero-subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; letter-spacing: 2px; color: var(--text-dim); }
+
+    /* Sections */
+    .section { padding: 6rem 2rem; border-bottom: 1px solid var(--border-color); }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 3px; color: var(--accent-red); margin-bottom: 1rem; }
+    .section-title { font-family: var(--font-heading); font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1rem; }
+    .section-desc { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+    /* Featured Section */
+    .featured-card {
+      display: grid; grid-template-columns: 1.2fr 1fr; background: var(--bg-card);
+      border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;
+    }
+    .featured-media { position: relative; min-height: 350px; }
+    .featured-image { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(30%) contrast(120%); }
+    .featured-overlay { position: absolute; inset: 0; background: linear-gradient(to right, transparent, var(--bg-card)); }
+    .featured-badge { position: absolute; top: 1.5rem; left: 1.5rem; background: var(--accent-red); color: #fff; font-size: 0.7rem; padding: 0.3rem 0.8rem; border-radius: 4px; font-family: var(--font-mono); }
+    .featured-content { padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .featured-title { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem; }
+    .featured-desc { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
+    .featured-meta { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
+
+    /* Grids & Cards */
+    .video-grid, .tech-grid, .category-grid, .community-grid, .social-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+    }
+    .youtube-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px;
+      padding: 4rem 2rem; text-align: center; max-width: 700px; margin: 0 auto;
+    }
+    .youtube-logo { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--accent-red); margin-bottom: 1.5rem; object-fit: cover; }
+    .youtube-title { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem; }
+    .youtube-handle { font-family: var(--font-mono); color: var(--accent-red); margin-bottom: 1.5rem; }
+    .youtube-desc { color: var(--text-muted); margin-bottom: 2rem; }
+
+    /* Footer */
+    .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 5rem 2rem 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+    .footer-brand img { width: 40px; height: 40px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover; }
+    .footer-brand h3 { font-family: var(--font-heading); font-size: 1rem; margin-bottom: 0.5rem; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.85rem; }
+    .footer h4 { font-family: var(--font-heading); font-size: 0.9rem; margin-bottom: 1.5rem; color: var(--text-main); }
+    .footer ul li { margin-bottom: 0.75rem; }
+    .footer ul a { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
+    .footer ul a:hover { color: var(--accent-red); }
+    .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-dim); }
+    .footer-legal { display: flex; gap: 1.5rem; }
+
+    @media (max-width: 968px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
   <!-- Screen Glitch Overlay for Easter Egg -->
@@ -111,7 +243,7 @@
         
         <div class="hero-ctas">
           <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20"><path d="M8 5v14l11-7z"/></svg>
             WATCH ON YOUTUBE
           </a>
           <a href="#featured" class="btn btn-outline btn-lg">
@@ -148,7 +280,7 @@
               هذه ليست نظرية مؤامرة. هذه وثائق مسربة من داخل الشركة.
             </p>
             <div class="featured-meta">
-              <span class="meta-item"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 18:42</span>
+              <span class="meta-item">18:42</span>
               <span class="meta-item">15 أغسطس 2026</span>
               <span class="meta-item category">DARK TECH</span>
             </div>
@@ -173,7 +305,7 @@
           <!-- Populated by JS -->
         </div>
         
-        <div class="section-cta">
+        <div class="section-cta" style="text-align: center; margin-top: 3rem;">
           <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-outline" target="_blank" rel="noopener">
             VIEW ALL ON YOUTUBE
           </a>
@@ -228,20 +360,16 @@
     <section class="section youtube-section" id="youtube">
       <div class="container">
         <div class="youtube-card">
-          <div class="youtube-logo-wrap">
-            <img src="/images/logo.jfif" alt="Soliman Nightmares" class="youtube-logo">
-          </div>
-          <div class="youtube-info">
-            <h2 class="youtube-title">SOLIMAN NIGHTMARES</h2>
-            <p class="youtube-handle">@solimannightmares</p>
-            <p class="youtube-desc">
-              القناة الرسمية لقصص الرعب والغموض والتكنولوجيا المظلمة. 
-              كل حلقة تفتح بابًا جديدًا إلى ما لا يجب أن يُفتح.
-            </p>
-            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-              SUBSCRIBE ON YOUTUBE
-            </a>
-          </div>
+          <img src="/images/logo.jfif" alt="Soliman Nightmares" class="youtube-logo">
+          <h2 class="youtube-title">SOLIMAN NIGHTMARES</h2>
+          <p class="youtube-handle">@solimannightmares</p>
+          <p class="youtube-desc">
+            القناة الرسمية لقصص الرعب والغموض والتكنولوجيا المظلمة. 
+            كل حلقة تفتح بابًا جديدًا إلى ما لا يجب أن يُفتح.
+          </p>
+          <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+            SUBSCRIBE ON YOUTUBE
+          </a>
         </div>
       </div>
     </section>
@@ -277,37 +405,32 @@
 
     <!-- 10 ABOUT -->
     <section class="section about" id="about">
-      <div class="container">
-        <div class="about-content">
-          <span class="section-tag">WHAT LURKS IN THE DARK?</span>
-          <h2 class="section-title">عالم يجمع بين الرعب والتكنولوجيا</h2>
-          <div class="about-text">
-            <p>
-              Soliman Nightmares ليس مجرد قناة يوتيوب. إنه عالم يتقاطع فيه الرعب الكلاسيكي 
-              مع أخطر ما أنتجه العقل البشري: التكنولوجيا التي لا نفهم حدودها.
-            </p>
-            <p>
-              هنا نروي القصص التي تجعلك تشك في الظلال، وفي الخوارزميات التي تراقبك، 
-              وفي الأساطير التي تعود من خلال الشاشات. 
-              من أحداث غير مفسرة إلى سيناريوهات مستقبلية مرعبة، ومن الإنترنت المظلم إلى الذكاء الاصطناعي الذي يتعلم الخوف.
-            </p>
-            <p>
-              كل قصة هي دعوة لدخول عالم لا يوجد فيه ضوء آمن.
-            </p>
-          </div>
-          <a href="/pages/about.html" class="btn btn-outline">اقرأ المزيد</a>
+      <div class="container" style="max-width: 800px; text-align: center;">
+        <span class="section-tag">WHAT LURKS IN THE DARK?</span>
+        <h2 class="section-title">عالم يجمع بين الرعب والتكنولوجيا</h2>
+        <div class="about-text" style="color: var(--text-muted); margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+          <p>
+            Soliman Nightmares ليس مجرد قناة يوتيوب. إنه عالم يتقاطع فيه الرعب الكلاسيكي 
+            مع أخطر ما أنتجه العقل البشري: التكنولوجيا التي لا نفهم حدودها.
+          </p>
+          <p>
+            هنا نروي القصص التي تجعلك تشك في الظلال، وفي الخوارزميات التي تراقبك، 
+            وفي الأساطير التي تعود من خلال الشاشات. 
+            من أحداث غير مفسرة إلى سيناريوهات مستقبلية مرعبة، ومن الإنترنت المظلم إلى الذكاء الاصطناعي الذي يتعلم الخوف.
+          </p>
+          <p>
+            كل قصة هي دعوة لدخول عالم لا يوجد فيه ضوء آمن.
+          </p>
         </div>
+        <a href="/pages/about.html" class="btn btn-outline">اقرأ المزيد</a>
       </div>
     </section>
 
     <!-- 11 FINAL CTA -->
-    <section class="section final-cta" id="final-cta">
-      <div class="cta-bg">
-        <div class="cta-glow"></div>
-      </div>
+    <section class="section final-cta" id="final-cta" style="text-align: center;">
       <div class="container">
-        <h2 class="cta-title">THE NEXT NIGHTMARE IS WAITING</h2>
-        <p class="cta-subtitle">الكابوس التالي ينتظرك بالفعل</p>
+        <h2 class="cta-title" style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem;">THE NEXT NIGHTMARE IS WAITING</h2>
+        <p class="cta-subtitle" style="color: var(--text-muted); margin-bottom: 2rem;">الكابوس التالي ينتظرك بالفعل</p>
         <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary btn-xl" target="_blank" rel="noopener">
           WATCH ON YOUTUBE
         </a>
@@ -320,7 +443,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="/images/logo.jfif" alt="Soliman Nightmares" class="footer-logo">
+          <img src="/images/logo.jfif" alt="Soliman Nightmares">
           <h3>SOLIMAN NIGHTMARES</h3>
           <p>عالم الرعب · الغموض · التكنولوجيا المظلمة</p>
         </div>
