@@ -3,258 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stories / Nightmares | Soliman Nightmares</title>
-  <meta name="description" content="قصص الرعب، الغموض، والتكنولوجيا المظلمة من عالم Soliman Nightmares">
-  <link rel="icon" href="../images/logo.jfif" type="image/jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/main.css">
+  <title>Stories | Soliman Nightmares</title>
+  <link rel="icon" href="images/logo.jfif" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    .stories-page { padding-top: calc(var(--nav-height) + 2rem); min-height: 100vh; }
-    .filters-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      align-items: center;
-      justify-content: center;
+    :root {
+      --bg-deep: #050505;
+      --bg-card: #0c0c0c;
+      --bg-hover: #141414;
+      --border-color: #222222;
+      --accent-red: #c91818;
+      --accent-glow: rgba(201, 24, 24, 0.3);
+      --text-main: #e0e0e0;
+      --text-muted: #888888;
+      --text-dim: #555555;
+      --font-heading: 'Cinzel', 'Noto Sans Arabic', serif;
+      --font-body: 'Inter', 'Noto Sans Arabic', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .search-input {
-      background: var(--charcoal);
-      border: 1px solid var(--border-gray);
-      border-radius: var(--radius-sm);
-      padding: 0.65rem 1rem;
-      color: var(--off-white);
-      font-family: var(--font-arabic);
-      font-size: 0.9rem;
-      min-width: 220px;
-      transition: border-color 0.2s;
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
     }
-    .search-input:focus {
-      outline: none;
-      border-color: var(--crimson);
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
     }
-    .filter-btn {
-      padding: 0.5rem 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid var(--border-gray);
-      border-radius: var(--radius-sm);
-      color: var(--muted);
-      transition: all 0.2s;
+    .nav-container {
+      max-width: 1300px; margin: 0 auto; padding: 0.8rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .filter-btn:hover, .filter-btn.active {
-      border-color: var(--crimson);
-      color: var(--crimson);
-      background: var(--crimson-soft);
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-img { border-radius: 4px; object-fit: cover; }
+    .logo-text { font-family: var(--font-heading); font-weight: 700; letter-spacing: 2px; font-size: 1rem; color: #fff; }
+    
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-link { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
+    .nav-link:hover, .nav-link.active { color: var(--accent-red); }
+
+    .nav-socials {
+      display: flex; gap: 0.75rem; align-items: center; margin-left: 10px; padding-left: 15px; border-left: 1px solid var(--border-color);
     }
-    .stories-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+    .social-icon-btn {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px;
+      color: var(--text-muted); font-size: 0.8rem; transition: var(--transition);
     }
-    @media (min-width: 768px) {
-      .stories-list { grid-template-columns: repeat(2, 1fr); }
+    .social-icon-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px;
+      border-radius: 4px; transition: var(--transition); cursor: pointer;
     }
-    .story-item {
-      background: var(--charcoal);
-      border: 1px solid var(--border-gray);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-      display: flex;
-      flex-direction: column;
+    .btn-primary { background: var(--accent-red); color: #fff; border: 1px solid var(--accent-red); }
+    .btn-primary:hover { background: #a51212; box-shadow: 0 0 15px var(--accent-glow); }
+
+    /* Page Header */
+    .page-header {
+      padding: 10rem 2rem 4rem; text-align: center; background: radial-gradient(circle at center, #1a0505 0%, var(--bg-deep) 70%);
+      border-bottom: 1px solid var(--border-color);
     }
-    .story-item:hover {
-      border-color: rgba(196,30,58,0.35);
-      transform: translateY(-3px);
+    .page-title { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+    .page-desc { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+    /* Content Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+    
+    .stories-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;
     }
-    .story-item-img {
-      aspect-ratio: 16/9;
-      background-size: cover;
-      background-position: center;
+    .story-card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; transition: var(--transition);
     }
-    .story-item-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
-    .story-item-cat {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--crimson);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.4rem;
-    }
-    .story-item-title {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      font-family: var(--font-arabic);
-    }
-    .story-item-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      flex: 1;
-      font-family: var(--font-arabic);
-    }
-    .story-item-meta {
-      font-size: 0.75rem;
-      color: var(--dim);
-      display: flex;
-      gap: 1rem;
-    }
-    .no-results {
-      text-align: center;
-      padding: 3rem;
-      color: var(--muted);
-      font-family: var(--font-arabic);
-    }
+    .story-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
+    .story-img { height: 200px; background-size: cover; background-position: center; filter: grayscale(20%); }
+    .story-body { padding: 2rem; }
+    .story-title { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 1rem; color: #fff; }
+    .story-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    /* Footer */
+    .footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 3rem 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
   </style>
 </head>
 <body>
-  <div id="easter-overlay" class="easter-overlay" aria-hidden="true"></div>
-  <div id="easter-message" class="easter-message" role="status" aria-live="polite"></div>
 
-  <nav id="navbar" class="navbar scrolled">
+  <!-- Navigation -->
+  <nav class="navbar">
     <div class="nav-container">
-      <a href="../index.html" class="nav-logo" id="logo-trigger">
-        <img src="../images/logo.jfif" alt="Soliman Nightmares" class="logo-img" width="48" height="48">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jfif" alt="Logo" class="logo-img" width="40" height="40">
         <span class="logo-text">SOLIMAN NIGHTMARES</span>
       </a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="../index.html" class="nav-link">Home</a></li>
+      
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="nightmares.html" class="nav-link">Nightmares</a></li>
         <li><a href="dark-tech.html" class="nav-link">Dark Tech</a></li>
         <li><a href="stories.html" class="nav-link active">Stories</a></li>
         <li><a href="messages.html" class="nav-link">Messages</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="nav-link" target="_blank" rel="noopener">YouTube</a></li>
       </ul>
-      <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary nav-cta" target="_blank" rel="noopener">WATCH ON YOUTUBE</a>
+
+      <div class="nav-socials">
+        <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="social-icon-btn" target="_blank" title="YouTube">YT</a>
+        <a href="https://t.me/+Di-kNOxDldE0OTk0" class="social-icon-btn" target="_blank" title="Telegram">TG</a>
+        <a href="https://discord.gg/bXbSysEwa" class="social-icon-btn" target="_blank" title="Discord">DC</a>
+        <a href="https://www.facebook.com/share/1ZWHfsjDSw/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" title="Facebook">FB</a>
+      </div>
+      
+      <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">SUBSCRIBE</a>
     </div>
   </nav>
 
-  <main class="stories-page">
+  <main>
+    <header class="page-header">
+      <h1 class="page-title">// STORIES</h1>
+      <p class="page-desc">سرداب القصص والروايات المرعبة المروية بعناية لأصحاب القلوب القوية.</p>
+    </header>
+
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">NIGHTMARES ARCHIVE</span>
-        <h1 class="section-title">Stories</h1>
-        <p class="section-desc">كل القصص التي خرجت من الظلام</p>
-      </div>
+      <div class="stories-grid">
+        <div class="story-card">
+          <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=800&q=80')"></div>
+          <div class="story-body">
+            <h3 class="story-title">حكاية الليلة الأخيرة</h3>
+            <p class="story-text">رواية قصيرة عن قطار يتوقف في محطة غير موجودة بجدول الرحلات الرسمي ويصعد إليها ركاب غريبون.</p>
+            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">اقرأ / استمع</a>
+          </div>
+        </div>
 
-      <div class="filters-bar">
-        <input type="search" class="search-input" id="search-input" placeholder="ابحث في القصص..." aria-label="بحث">
-        <button class="filter-btn active" data-cat="all">ALL</button>
-        <button class="filter-btn" data-cat="horror">HORROR</button>
-        <button class="filter-btn" data-cat="mystery">MYSTERY</button>
-        <button class="filter-btn" data-cat="dark-tech">DARK TECH</button>
-        <button class="filter-btn" data-cat="dark-web">DARK WEB</button>
-        <button class="filter-btn" data-cat="future">FUTURE</button>
-      </div>
+        <div class="story-card">
+          <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80')"></div>
+          <div class="story-body">
+            <h3 class="story-title">الظل الذي يتبعني</h3>
+            <p class="story-text">قصة درامية مرعبة عن انعكاس في المرايا يبدأ بالتصرف بشكل مستقل عن الشخص الحقيقي.</p>
+            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">اقرأ / استمع</a>
+          </div>
+        </div>
 
-      <div class="stories-list" id="stories-list"></div>
-      <div class="no-results" id="no-results" hidden>لا توجد قصص مطابقة.</div>
+        <div class="story-card">
+          <div class="story-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80')"></div>
+          <div class="story-body">
+            <h3 class="story-title">أسرار الغرفة رقم 404</h3>
+            <p class="story-text">ماذا يحدث نزلاء أحد الفنادق القديمة عندما يغامرون بفتح باب الغرفة المحرمة؟</p>
+            <a href="https://youtube.com/@solimannightmares?si=w_bGt-2Zk-AxQQC4" class="btn btn-primary" target="_blank">اقرأ / استمع</a>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom" style="border:none;padding-top:0;">
-        <p>&copy; 2026 Soliman Nightmares.</p>
-        <a href="../index.html">Home</a>
-      </div>
-    </div>
+    <p>&copy; 2026 Soliman Nightmares. All rights reserved.</p>
   </footer>
 
-  <script src="../js/data.js"></script>
-  <script src="../js/easter-egg.js"></script>
-  <script>
-    (function () {
-      const list = document.getElementById('stories-list');
-      const noResults = document.getElementById('no-results');
-      const searchInput = document.getElementById('search-input');
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      let currentCat = 'all';
-      let currentQuery = '';
-
-      // Read URL params
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('cat')) {
-        currentCat = params.get('cat');
-        filterBtns.forEach(b => {
-          b.classList.toggle('active', b.dataset.cat === currentCat || (currentCat === 'all' && b.dataset.cat === 'all'));
-        });
-      }
-
-      function render() {
-        if (typeof STORIES === 'undefined') return;
-        let filtered = STORIES.slice();
-
-        if (currentCat !== 'all') {
-          filtered = filtered.filter(s => s.category === currentCat);
-        }
-        if (currentQuery) {
-          const q = currentQuery.toLowerCase();
-          filtered = filtered.filter(s =>
-            s.title.toLowerCase().includes(q) ||
-            s.description.toLowerCase().includes(q) ||
-            (s.content && s.content.toLowerCase().includes(q))
-          );
-        }
-
-        if (filtered.length === 0) {
-          list.innerHTML = '';
-          noResults.hidden = false;
-          return;
-        }
-        noResults.hidden = true;
-
-        list.innerHTML = filtered.map(s => `
-          <article class="story-item">
-            <div class="story-item-img" style="background-image:url('${s.image}')"></div>
-            <div class="story-item-body">
-              <div class="story-item-cat">${s.category.toUpperCase()}</div>
-              <h2 class="story-item-title">${s.title}</h2>
-              <p class="story-item-desc">${s.description}</p>
-              <div class="story-item-meta">
-                <span>${s.readingTime} min read</span>
-                <span>${s.date}</span>
-              </div>
-            </div>
-          </article>
-        `).join('');
-      }
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentCat = btn.dataset.cat;
-          render();
-        });
-      });
-
-      let searchTimeout;
-      searchInput.addEventListener('input', () => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          currentQuery = searchInput.value.trim();
-          render();
-        }, 200);
-      });
-
-      // Nav mobile
-      const navToggle = document.getElementById('nav-toggle');
-      const navLinks = document.getElementById('nav-links');
-      if (navToggle) {
-        navToggle.addEventListener('click', () => {
-          const open = navToggle.getAttribute('aria-expanded') === 'true';
-          navToggle.setAttribute('aria-expanded', String(!open));
-          navLinks.classList.toggle('open', !open);
-        });
-      }
-
-      render();
-    })();
-  </script>
 </body>
 </html>
